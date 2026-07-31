@@ -1,0 +1,1108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ignite Beauty & Luxury Salon — Beauty Designed Around You</title>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400;1,500;1,600&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- AOS Animation Library -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com">
+    </script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        serif: ['Playfair Display', 'Georgia', 'serif'],
+                        sans: ['Inter', 'system-ui', 'sans-serif'],
+                    },
+                    colors: {
+                        champagne: '#c9a96e',
+                        'champagne-light': '#d4b87a',
+                        'champagne-dark': '#b8944a',
+                        ivory: '#faf8f5',
+                        'ivory-warm': '#f5f0e8',
+                        'rich-black': '#0a0a0a',
+                        'soft-black': '#1a1a1a',
+                        'warm-gray': '#8a8580',
+                    },
+                }
+            }
+        }
+    </script>
+
+    <style>
+        :root {
+            --champagne: #c9a96e;
+            --champagne-light: #d4b87a;
+            --champagne-dark: #b8944a;
+            --ivory: #faf8f5;
+            --ivory-warm: #f5f0e8;
+            --rich-black: #0a0a0a;
+            --soft-black: #1a1a1a;
+            --warm-gray: #8a8580;
+            --glass-bg: rgba(10, 10, 10, 0.75);
+            --glass-border: rgba(201, 169, 110, 0.18);
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+            scrollbar-width: thin;
+            scrollbar-color: var(--champagne) var(--rich-black);
+        }
+
+        ::-webkit-scrollbar {
+            width: 5px;
+        }
+        ::-webkit-scrollbar-track {
+            background: var(--rich-black);
+        }
+        ::-webkit-scrollbar-thumb {
+            background: var(--champagne-dark);
+            border-radius: 10px;
+        }
+
+        body {
+            font-family: 'Inter', system-ui, sans-serif;
+            background-color: var(--rich-black);
+            color: var(--ivory);
+            margin: 0;
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        /* Progress Bar */
+        #progress-bar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 3px;
+            z-index: 10001;
+            background: linear-gradient(90deg, var(--champagne-dark), var(--champagne-light), var(--champagne));
+            width: 0%;
+            transition: width 0.1s linear;
+            border-radius: 0 2px 2px 0;
+        }
+
+        /* Navbar */
+        #navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 10000;
+            padding: 1rem 2rem;
+            transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            background: transparent;
+        }
+        #navbar.scrolled {
+            background: var(--glass-bg);
+            backdrop-filter: blur(24px);
+            -webkit-backdrop-filter: blur(24px);
+            border-bottom: 1px solid var(--glass-border);
+            padding: 0.75rem 2rem;
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.4);
+        }
+
+        /* Hero Glow */
+        .hero-glow {
+            position: absolute;
+            width: 650px;
+            height: 650px;
+            background: radial-gradient(circle, rgba(201, 169, 110, 0.12) 0%, rgba(201, 169, 110, 0.03) 35%, transparent 70%);
+            border-radius: 50%;
+            pointer-events: none;
+            animation: floatGlow 9s ease-in-out infinite;
+        }
+        .hero-glow.secondary {
+            width: 400px;
+            height: 400px;
+            animation: floatGlow 12s ease-in-out infinite reverse;
+            background: radial-gradient(circle, rgba(212, 184, 122, 0.10) 0%, transparent 70%);
+        }
+        @keyframes floatGlow {
+            0%,
+            100% {
+                transform: translate(0, 0) scale(1);
+            }
+            25% {
+                transform: translate(35px, -25px) scale(1.05);
+            }
+            50% {
+                transform: translate(-15px, -40px) scale(0.95);
+            }
+            75% {
+                transform: translate(-30px, 15px) scale(1.04);
+            }
+        }
+
+        /* Glass Card */
+        .glass-card {
+            background: rgba(26, 26, 26, 0.65);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(201, 169, 110, 0.12);
+            border-radius: 18px;
+            transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+        .glass-card:hover {
+            border-color: rgba(201, 169, 110, 0.3);
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5), 0 0 0 1px rgba(201, 169, 110, 0.15) inset;
+            transform: translateY(-6px);
+        }
+
+        /* Service Card */
+        .service-card {
+            background: rgba(26, 26, 26, 0.7);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            border-radius: 20px;
+            padding: 2rem 1.75rem;
+            text-align: center;
+            transition: all 0.45s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            cursor: default;
+            position: relative;
+            overflow: hidden;
+        }
+        .service-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%) translateY(-100%);
+            width: 120px;
+            height: 120px;
+            background: radial-gradient(circle, rgba(201, 169, 110, 0.18) 0%, transparent 70%);
+            border-radius: 50%;
+            transition: transform 0.5s ease;
+            pointer-events: none;
+        }
+        .service-card:hover::before {
+            transform: translateX(-50%) translateY(-30%);
+        }
+        .service-card:hover {
+            border-color: rgba(201, 169, 110, 0.3);
+            box-shadow: 0 24px 55px rgba(0, 0, 0, 0.55);
+            transform: translateY(-8px);
+        }
+        .service-icon {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: rgba(201, 169, 110, 0.1);
+            margin-bottom: 1.25rem;
+            transition: all 0.4s ease;
+            font-size: 1.5rem;
+        }
+        .service-card:hover .service-icon {
+            background: rgba(201, 169, 110, 0.22);
+            box-shadow: 0 0 35px rgba(201, 169, 110, 0.25);
+            transform: scale(1.08);
+        }
+
+        /* Button Styles */
+        .btn-primary {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: linear-gradient(135deg, var(--champagne-dark), var(--champagne), var(--champagne-light));
+            color: var(--rich-black);
+            font-weight: 600;
+            padding: 0.9rem 2rem;
+            border-radius: 50px;
+            letter-spacing: 0.02em;
+            transition: all 0.35s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            cursor: pointer;
+            border: none;
+            font-family: 'Inter', sans-serif;
+            font-size: 0.95rem;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 8px 30px rgba(201, 169, 110, 0.2);
+        }
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 16px 45px rgba(201, 169, 110, 0.35);
+            background: linear-gradient(135deg, var(--champagne), var(--champagne-light), #e0c890);
+        }
+        .btn-primary:active {
+            transform: translateY(-1px) scale(0.97);
+        }
+        .btn-outline {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: transparent;
+            color: var(--ivory);
+            font-weight: 500;
+            padding: 0.85rem 1.9rem;
+            border-radius: 50px;
+            letter-spacing: 0.02em;
+            transition: all 0.35s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            cursor: pointer;
+            border: 1.5px solid rgba(201, 169, 110, 0.45);
+            font-family: 'Inter', sans-serif;
+            font-size: 0.95rem;
+        }
+        .btn-outline:hover {
+            border-color: var(--champagne);
+            background: rgba(201, 169, 110, 0.06);
+            transform: translateY(-3px);
+            box-shadow: 0 12px 35px rgba(0, 0, 0, 0.3);
+        }
+
+        /* Testimonial Card */
+        .testimonial-card {
+            background: rgba(26, 26, 26, 0.6);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            border-radius: 18px;
+            padding: 1.75rem;
+            transition: all 0.4s ease;
+            position: relative;
+        }
+        .testimonial-card:hover {
+            border-color: rgba(201, 169, 110, 0.25);
+            box-shadow: 0 18px 45px rgba(0, 0, 0, 0.45);
+            transform: translateY(-4px);
+        }
+        .star {
+            color: var(--champagne);
+            font-size: 1rem;
+        }
+
+        /* Gallery Image Hover */
+        .gallery-img {
+            border-radius: 14px;
+            overflow: hidden;
+            cursor: pointer;
+            position: relative;
+            transition: all 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+        .gallery-img img {
+            transition: transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        .gallery-img:hover img {
+            transform: scale(1.08);
+        }
+        .gallery-img::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to top, rgba(10, 10, 10, 0.5) 0%, transparent 50%);
+            opacity: 0;
+            transition: opacity 0.4s ease;
+            pointer-events: none;
+            border-radius: 14px;
+        }
+        .gallery-img:hover::after {
+            opacity: 1;
+        }
+
+        /* Lightbox */
+        #lightbox {
+            position: fixed;
+            inset: 0;
+            z-index: 99999;
+            background: rgba(0, 0, 0, 0.92);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            cursor: pointer;
+        }
+        #lightbox.active {
+            display: flex;
+        }
+        #lightbox img {
+            max-width: 90vw;
+            max-height: 85vh;
+            border-radius: 12px;
+            box-shadow: 0 30px 80px rgba(0, 0, 0, 0.7);
+            animation: lightboxIn 0.35s ease-out;
+        }
+        @keyframes lightboxIn {
+            from {
+                opacity: 0;
+                transform: scale(0.9);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+        #lightbox .close-btn {
+            position: absolute;
+            top: 1.5rem;
+            right: 2rem;
+            font-size: 2.5rem;
+            color: var(--ivory);
+            cursor: pointer;
+            z-index: 10;
+            transition: color 0.3s;
+            line-height: 1;
+        }
+        #lightbox .close-btn:hover {
+            color: var(--champagne);
+        }
+
+        /* Mobile Menu */
+        #mobile-menu {
+            position: fixed;
+            inset: 0;
+            z-index: 9999;
+            background: rgba(10, 10, 10, 0.96);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 2rem;
+            transform: translateY(-100%);
+            transition: transform 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+        }
+        #mobile-menu.active {
+            transform: translateY(0);
+        }
+        #mobile-menu a {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.8rem;
+            color: var(--ivory);
+            text-decoration: none;
+            letter-spacing: 0.04em;
+            transition: color 0.3s;
+            position: relative;
+        }
+        #mobile-menu a::after {
+            content: '';
+            position: absolute;
+            bottom: -6px;
+            left: 50%;
+            transform: translateX(-50%) scaleX(0);
+            width: 60%;
+            height: 2px;
+            background: var(--champagne);
+            transition: transform 0.35s ease;
+        }
+        #mobile-menu a:hover {
+            color: var(--champagne);
+        }
+        #mobile-menu a:hover::after {
+            transform: translateX(-50%) scaleX(1);
+        }
+
+        /* Form Input */
+        .luxury-input {
+            width: 100%;
+            padding: 1rem 1.25rem;
+            background: rgba(26, 26, 26, 0.7);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            color: var(--ivory);
+            font-family: 'Inter', sans-serif;
+            font-size: 0.95rem;
+            transition: all 0.35s ease;
+            outline: none;
+        }
+        .luxury-input:focus {
+            border-color: var(--champagne);
+            box-shadow: 0 0 0 3px rgba(201, 169, 110, 0.1);
+            background: rgba(30, 30, 30, 0.8);
+        }
+        .luxury-input::placeholder {
+            color: rgba(250, 248, 245, 0.4);
+        }
+        .luxury-select {
+            appearance: none;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%23c9a96e' stroke-width='2'%3E%3Cpath d='M6 9l6 6 6-6'%3E%3C/path%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: right 1rem center;
+            padding-right: 2.5rem;
+        }
+
+        /* Section Label */
+        .section-label {
+            display: inline-block;
+            font-family: 'Inter', sans-serif;
+            font-size: 0.8rem;
+            font-weight: 500;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            color: var(--champagne);
+            margin-bottom: 0.75rem;
+            position: relative;
+            padding-left: 2rem;
+        }
+        .section-label::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 20px;
+            height: 1.5px;
+            background: var(--champagne);
+        }
+
+        /* Counter */
+        .counter-value {
+            font-family: 'Playfair Display', serif;
+            font-weight: 700;
+            font-size: 2.8rem;
+            color: var(--champagne);
+            line-height: 1;
+        }
+
+        @media (max-width: 768px) {
+            .counter-value {
+                font-size: 2.2rem;
+            }
+            #navbar {
+                padding: 0.85rem 1.25rem;
+            }
+            #navbar.scrolled {
+                padding: 0.65rem 1.25rem;
+            }
+            .hero-glow {
+                width: 350px;
+                height: 350px;
+            }
+            .hero-glow.secondary {
+                width: 220px;
+                height: 220px;
+            }
+            .service-card {
+                padding: 1.5rem 1.25rem;
+            }
+        }
+    </style>
+</head>
+<body class="bg-rich-black text-ivory font-sans antialiased">
+
+    <!-- Progress Bar -->
+    <div id="progress-bar"></div>
+
+    <!-- Navbar -->
+    <nav id="navbar" class="flex items-center justify-between">
+        <!-- Logo -->
+        <a href="#home" class="flex items-center gap-2 no-underline">
+            <span class="font-serif text-2xl md:text-3xl font-bold tracking-wide text-ivory">
+                Ignite<span class="text-champagne italic">.</span>
+            </span>
+        </a>
+
+        <!-- Desktop Links -->
+        <div class="hidden md:flex items-center gap-8">
+            <a href="#home" class="text-ivory/80 hover:text-champagne transition-colors duration-300 text-sm tracking-wide font-medium no-underline">Home</a>
+            <a href="#services" class="text-ivory/80 hover:text-champagne transition-colors duration-300 text-sm tracking-wide font-medium no-underline">Services</a>
+            <a href="#gallery" class="text-ivory/80 hover:text-champagne transition-colors duration-300 text-sm tracking-wide font-medium no-underline">Gallery</a>
+            <a href="#reviews" class="text-ivory/80 hover:text-champagne transition-colors duration-300 text-sm tracking-wide font-medium no-underline">Reviews</a>
+            <a href="#booking" class="btn-primary text-sm py-2.5 px-6 no-underline">
+                Book Appointment
+            </a>
+        </div>
+
+        <!-- Hamburger (Mobile) -->
+        <button id="hamburger" class="md:hidden flex flex-col gap-1.5 cursor-pointer bg-transparent border-none p-2 z-[10001] relative" aria-label="Menu">
+            <span class="block w-7 h-0.5 bg-ivory rounded transition-all duration-350 origin-center" id="ham-line1"></span>
+            <span class="block w-7 h-0.5 bg-ivory rounded transition-all duration-350 origin-center" id="ham-line2"></span>
+            <span class="block w-5 h-0.5 bg-ivory rounded transition-all duration-350 origin-center self-end" id="ham-line3"></span>
+        </button>
+    </nav>
+
+    <!-- Mobile Menu -->
+    <div id="mobile-menu">
+        <a href="#home" class="mobile-nav-link">Home</a>
+        <a href="#services" class="mobile-nav-link">Services</a>
+        <a href="#gallery" class="mobile-nav-link">Gallery</a>
+        <a href="#reviews" class="mobile-nav-link">Reviews</a>
+        <a href="#booking" class="mobile-nav-link">Book Appointment</a>
+    </div>
+
+    <!-- ==================== HERO SECTION ==================== -->
+    <section id="home" class="relative min-h-screen flex items-center overflow-hidden pt-20 md:pt-0">
+    <!-- Floating Glows -->
+    <div class="hero-glow" style="top: 10%; right: -5%;"></div>
+    <div class="hero-glow secondary" style="bottom: 5%; left: -8%;"></div>
+
+    <div class="w-full max-w-7xl mx-auto px-5 md:px-8 lg:px-12 flex flex-col md:flex-row items-center gap-10 md:gap-6 lg:gap-10">
+        <!-- Left Content -->
+        <div class="flex-1 text-center md:text-left z-10" data-aos="fade-up" data-aos-duration="900" data-aos-easing="ease-out-cubic">
+            <span class="section-label">Luxury Hair • Beauty • Experience</span>
+            <h1 class="font-serif text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold leading-tight text-ivory mb-5 tracking-tight">
+                Beauty<br class="hidden sm:block"> Designed<br class="hidden sm:block"> Around <span class="italic text-champagne">You.</span>
+            </h1>
+            <p class="text-warm-gray text-base md:text-lg max-w-lg mb-8 leading-relaxed">
+                Experience premium beauty services in an elegant space created for confidence, comfort, and effortless luxury.
+            </p>
+            <div class="flex flex-col sm:flex-row gap-4 justify-center md:justify-start">
+                <a href="#booking" class="btn-primary text-center justify-center">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+                    Book Appointment
+                </a>
+                <a href="#services" class="btn-outline text-center justify-center">
+                    Explore Services
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                </a>
+            </div>
+        </div>
+
+        <!-- Right Image – changed to landscape rectangle -->
+        <div class="flex-1 flex justify-center md:justify-end z-10" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="200" data-aos-easing="ease-out-cubic">
+            <div class="relative w-full max-w-lg">
+                <!-- Aspect ratio changed from 4/5 to 16/9 for a flatter, rectangular shape -->
+                <div class="aspect-[19/14] rounded-2xl overflow-hidden shadow-2xl border border-white/5">
+                    <img
+                    src="https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?w=800&h=450&fit=crop&crop=center"
+                    alt="Luxury salon interior wide"
+                    class="w-full h-full object-cover"
+                    loading="eager"
+                    >
+                </div>
+                <!-- Floating badge (repositioned for the new shape) -->
+                <div class="absolute -bottom-3 -left-4 md:-left-6 glass-card px-5 py-3 flex items-center gap-3" data-aos="fade-up" data-aos-delay="600">
+                    <div class="w-10 h-10 rounded-full bg-champagne/20 flex items-center justify-center">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--champagne)" stroke-width="2.5"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                    </div>
+                    <div>
+                        <p class="text-xs text-warm-gray">Rated</p>
+                        <p class="font-semibold text-ivory text-sm">4.9 ★★★★★</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    </section>
+
+    <!-- ==================== SERVICES SECTION ==================== -->
+    <section id="services" class="py-20 md:py-28 px-5 md:px-8 lg:px-12 max-w-7xl mx-auto">
+        <div class="text-center mb-14" data-aos="fade-up" data-aos-duration="700">
+            <span class="section-label">What We Offer</span>
+            <h2 class="font-serif text-3xl md:text-5xl font-bold text-ivory mb-4">Luxury Services</h2>
+            <p class="text-warm-gray max-w-xl mx-auto">Tailored beauty experiences crafted with precision, care, and the finest products.</p>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
+            <!-- Card 1 -->
+            <div class="service-card" data-aos="fade-up" data-aos-duration="600" data-aos-delay="0">
+                <div class="service-icon">💇‍♀️</div>
+                <h3 class="font-serif text-xl font-semibold text-ivory mb-2">Hair Styling</h3>
+                <p class="text-warm-gray text-sm leading-relaxed">Precision cuts, blowouts, and styling tailored to your unique features and lifestyle.</p>
+            </div>
+            <!-- Card 2 -->
+            <div class="service-card" data-aos="fade-up" data-aos-duration="600" data-aos-delay="100">
+                <div class="service-icon">✨</div>
+                <h3 class="font-serif text-xl font-semibold text-ivory mb-2">Protective Styling</h3>
+                <p class="text-warm-gray text-sm leading-relaxed">Gentle, long-lasting protective styles that prioritize hair health and elegance.</p>
+            </div>
+            <!-- Card 3 -->
+            <div class="service-card" data-aos="fade-up" data-aos-duration="600" data-aos-delay="200">
+                <div class="service-icon">🌿</div>
+                <h3 class="font-serif text-xl font-semibold text-ivory mb-2">Hair Treatments</h3>
+                <p class="text-warm-gray text-sm leading-relaxed">Deep conditioning, keratin, and scalp therapies using premium botanical formulas.</p>
+            </div>
+            <!-- Card 4 -->
+            <div class="service-card" data-aos="fade-up" data-aos-duration="600" data-aos-delay="150">
+                <div class="service-icon">💅</div>
+                <h3 class="font-serif text-xl font-semibold text-ivory mb-2">Nail Care</h3>
+                <p class="text-warm-gray text-sm leading-relaxed">Artistic manicures and pedicures in a serene, sanitized environment.</p>
+            </div>
+            <!-- Card 5 -->
+            <div class="service-card" data-aos="fade-up" data-aos-duration="600" data-aos-delay="250">
+                <div class="service-icon">👑</div>
+                <h3 class="font-serif text-xl font-semibold text-ivory mb-2">Beauty Sessions</h3>
+                <p class="text-warm-gray text-sm leading-relaxed">Full glam makeup, facials, and curated beauty rituals for any occasion.</p>
+            </div>
+            <!-- Card 6 -->
+            <div class="service-card" data-aos="fade-up" data-aos-duration="600" data-aos-delay="300">
+                <div class="service-icon">🏠</div>
+                <h3 class="font-serif text-xl font-semibold text-ivory mb-2">Home Service</h3>
+                <p class="text-warm-gray text-sm leading-relaxed">Bring the luxury to your doorstep with our exclusive at-home concierge service.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==================== LUXURY EXPERIENCE SECTION ==================== -->
+    <section class="py-20 md:py-28 px-5 md:px-8 lg:px-12 max-w-7xl mx-auto">
+        <div class="flex flex-col lg:flex-row items-center gap-12 lg:gap-16">
+            <!-- Left -->
+            <div class="flex-1" data-aos="fade-right" data-aos-duration="800">
+                <span class="section-label">The Ignite Difference</span>
+                <h2 class="font-serif text-3xl md:text-5xl font-bold text-ivory mb-6">More Than A<br>Salon Visit.</h2>
+                <div class="space-y-5">
+                    <div class="flex items-start gap-4">
+                        <div class="w-10 h-10 rounded-full bg-champagne/10 flex items-center justify-center flex-shrink-0 mt-0.5">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--champagne)" stroke-width="2.5"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/></svg>
+                        </div>
+                        <div>
+                            <h4 class="font-semibold text-ivory text-base">Elegant Environment</h4>
+                            <p class="text-warm-gray text-sm">A sanctuary designed with warm lighting, curated music, and refined interiors.</p>
+                        </div>
+                    </div>
+                    <div class="flex items-start gap-4">
+                        <div class="w-10 h-10 rounded-full bg-champagne/10 flex items-center justify-center flex-shrink-0 mt-0.5">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--champagne)" stroke-width="2.5"><circle cx="12" cy="8" r="5"/><path d="M20 21a8 8 0 00-16 0"/></svg>
+                        </div>
+                        <div>
+                            <h4 class="font-semibold text-ivory text-base">Expert Care</h4>
+                            <p class="text-warm-gray text-sm">Certified stylists and aestheticians with advanced training and a passion for excellence.</p>
+                        </div>
+                    </div>
+                    <div class="flex items-start gap-4">
+                        <div class="w-10 h-10 rounded-full bg-champagne/10 flex items-center justify-center flex-shrink-0 mt-0.5">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--champagne)" stroke-width="2.5"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/></svg>
+                        </div>
+                        <div>
+                            <h4 class="font-semibold text-ivory text-base">Flexible Booking</h4>
+                            <p class="text-warm-gray text-sm">Schedule at your convenience with fast confirmation and rescheduling options.</p>
+                        </div>
+                    </div>
+                    <div class="flex items-start gap-4">
+                        <div class="w-10 h-10 rounded-full bg-champagne/10 flex items-center justify-center flex-shrink-0 mt-0.5">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--champagne)" stroke-width="2.5"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                        </div>
+                        <div>
+                            <h4 class="font-semibold text-ivory text-base">Premium Results</h4>
+                            <p class="text-warm-gray text-sm">Every service is delivered with meticulous attention to detail for flawless outcomes.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Right: Counters -->
+            <div class="flex-1 w-full" data-aos="fade-left" data-aos-duration="800">
+                <div class="glass-card p-8 md:p-10 grid grid-cols-1 sm:grid-cols-3 gap-8 text-center">
+                    <div>
+                        <div class="counter-value" data-target="1000" data-suffix="+">0</div>
+                        <p class="text-warm-gray text-sm mt-2">Appointments</p>
+                    </div>
+                    <div>
+                        <div class="counter-value" data-target="500" data-suffix="+">0</div>
+                        <p class="text-warm-gray text-sm mt-2">Happy Clients</p>
+                    </div>
+                    <div>
+                        <div class="counter-value" data-target="4" data-suffix="+">0</div>
+                        <p class="text-warm-gray text-sm mt-2">Years of Experience</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==================== REVIEWS SECTION ==================== -->
+    <section id="reviews" class="py-20 md:py-28 px-5 md:px-8 lg:px-12 max-w-7xl mx-auto">
+        <div class="text-center mb-14" data-aos="fade-up" data-aos-duration="700">
+            <span class="section-label">Testimonials</span>
+            <h2 class="font-serif text-3xl md:text-5xl font-bold text-ivory mb-4">What Our Clients Say</h2>
+            <p class="text-warm-gray max-w-xl mx-auto">Real experiences from women who trust us with their beauty.</p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8">
+            <!-- Review 1 -->
+            <div class="testimonial-card" data-aos="fade-up" data-aos-duration="600" data-aos-delay="0">
+                <div class="flex items-center gap-3 mb-4">
+                    <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=80&h=80&fit=crop&crop=face" alt="Client" class="w-12 h-12 rounded-full object-cover border-2 border-champagne/30" loading="lazy">
+                    <div>
+                        <h4 class="font-semibold text-ivory text-sm">Amara O.</h4>
+                        <div class="flex gap-0.5 mt-0.5">
+                            <span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span>
+                        </div>
+                    </div>
+                </div>
+                <p class="text-warm-gray text-sm leading-relaxed italic">"The most luxurious salon experience I've ever had. Every detail is intentional, and I left feeling absolutely radiant."</p>
+            </div>
+
+            <!-- Review 2 -->
+            <div class="testimonial-card" data-aos="fade-up" data-aos-duration="600" data-aos-delay="150">
+                <div class="flex items-center gap-3 mb-4">
+                    <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=80&h=80&fit=crop&crop=face" alt="Client" class="w-12 h-12 rounded-full object-cover border-2 border-champagne/30" loading="lazy">
+                    <div>
+                        <h4 class="font-semibold text-ivory text-sm">Chloe M.</h4>
+                        <div class="flex gap-0.5 mt-0.5">
+                            <span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span>
+                        </div>
+                    </div>
+                </div>
+                <p class="text-warm-gray text-sm leading-relaxed italic">"I've been searching for a salon that truly understands my hair — Ignite exceeded every expectation. Pure perfection."</p>
+            </div>
+
+            <!-- Review 3 -->
+            <div class="testimonial-card" data-aos="fade-up" data-aos-duration="600" data-aos-delay="300">
+                <div class="flex items-center gap-3 mb-4">
+                    <img src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=80&h=80&fit=crop&crop=face" alt="Client" class="w-12 h-12 rounded-full object-cover border-2 border-champagne/30" loading="lazy">
+                    <div>
+                        <h4 class="font-semibold text-ivory text-sm">Zara K.</h4>
+                        <div class="flex gap-0.5 mt-0.5">
+                            <span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span>
+                        </div>
+                    </div>
+                </div>
+                <p class="text-warm-gray text-sm leading-relaxed italic">"The home service option is a game changer. Same luxury, delivered to my door. I'm a client for life."</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==================== GALLERY SECTION ==================== -->
+    <section id="gallery" class="py-20 md:py-28 px-5 md:px-8 lg:px-12 max-w-7xl mx-auto">
+        <div class="text-center mb-14" data-aos="fade-up" data-aos-duration="700">
+            <span class="section-label">Our Work</span>
+            <h2 class="font-serif text-3xl md:text-5xl font-bold text-ivory mb-4">The Gallery</h2>
+            <p class="text-warm-gray max-w-xl mx-auto">A glimpse into the artistry and elegance that defines every Ignite experience.</p>
+        </div>
+
+        <div class="grid grid-cols-2 md:grid-cols-3 gap-4 md:gap-5">
+            <!-- Large feature image -->
+            <div class="gallery-img col-span-2 md:col-span-2 row-span-2" data-aos="fade-up" data-aos-duration="600">
+                <img src="https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?w=800&h=600&fit=crop" alt="Salon feature" class="w-full h-full object-cover aspect-[4/3] md:aspect-auto" loading="lazy">
+            </div>
+            <div class="gallery-img" data-aos="fade-up" data-aos-duration="600" data-aos-delay="100">
+                <img src="https://images.unsplash.com/photo-1560869713-7d0a29430803?w=400&h=400&fit=crop" alt="Hair styling" class="w-full aspect-square object-cover" loading="lazy">
+            </div>
+            <div class="gallery-img" data-aos="fade-up" data-aos-duration="600" data-aos-delay="200">
+                <img src="https://images.unsplash.com/photo-1487412912498-0447578fcca8?w=400&h=400&fit=crop" alt="Beauty treatment" class="w-full aspect-square object-cover" loading="lazy">
+            </div>
+            <div class="gallery-img" data-aos="fade-up" data-aos-duration="600" data-aos-delay="150">
+                <img src="https://images.unsplash.com/photo-1516975080664-ed2fc6a32937?w=400&h=400&fit=crop" alt="Nail art" class="w-full aspect-square object-cover" loading="lazy">
+            </div>
+            <div class="gallery-img" data-aos="fade-up" data-aos-duration="600" data-aos-delay="250">
+                <img src="https://images.unsplash.com/photo-1522336572468-97b06e8ef143?w=400&h=400&fit=crop" alt="Salon detail" class="w-full aspect-square object-cover" loading="lazy">
+            </div>
+        </div>
+    </section>
+
+    <!-- ==================== BOOKING SECTION ==================== -->
+    <section id="booking" class="py-20 md:py-28 px-5 md:px-8 lg:px-12 max-w-4xl mx-auto">
+        <div class="text-center mb-12" data-aos="fade-up" data-aos-duration="700">
+            <span class="section-label">Reserve</span>
+            <h2 class="font-serif text-3xl md:text-5xl font-bold text-ivory mb-4">Reserve Your Moment.</h2>
+            <p class="text-warm-gray max-w-lg mx-auto">Your beauty deserves dedicated time. Book now and let us create something extraordinary for you.</p>
+        </div>
+
+        <div class="glass-card p-8 md:p-10" data-aos="fade-up" data-aos-duration="700" data-aos-delay="150">
+            <form id="booking-form" class="grid grid-cols-1 md:grid-cols-2 gap-5">
+                <div>
+                    <label class="block text-sm font-medium text-ivory/70 mb-1.5">Full Name</label>
+                    <input type="text" placeholder="Your name" class="luxury-input" required>
+                </div>
+                <div>
+                    <label class="block text-sm font-medium text-ivory/70 mb-1.5">Phone Number</label>
+                    <input type="tel" placeholder="+234 800 000 0000" class="luxury-input" required>
+                </div>
+                <div>
+                    <label class="block text-sm font-medium text-ivory/70 mb-1.5">Preferred Service</label>
+                    <select class="luxury-input luxury-select" required>
+                        <option value="" disabled selected>Select a service</option>
+                        <option>Hair Styling</option>
+                        <option>Protective Styling</option>
+                        <option>Hair Treatments</option>
+                        <option>Nail Care</option>
+                        <option>Beauty Sessions</option>
+                        <option>Home Service</option>
+                    </select>
+                </div>
+                <div>
+                    <label class="block text-sm font-medium text-ivory/70 mb-1.5">Preferred Date</label>
+                    <input type="date" class="luxury-input" required>
+                </div>
+                <div class="md:col-span-2 flex flex-col sm:flex-row gap-4 pt-2">
+                    <button type="submit" class="btn-primary flex-1 justify-center text-center">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+                        Book Appointment
+                    </button>
+                    <a href="https://wa.me/2348000000000?text=Hello%20Ignite%20Beauty,%20I'd%20like%20to%20book%20an%20appointment." target="_blank" rel="noopener" class="btn-outline flex-1 justify-center text-center no-underline">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+                        Chat on WhatsApp
+                    </a>
+                </div>
+            </form>
+
+            <!-- Trust Indicators -->
+            <div class="flex flex-wrap justify-center gap-6 mt-8 pt-6 border-t border-white/5" data-aos="fade-up" data-aos-delay="300">
+                <div class="flex items-center gap-2 text-xs text-warm-gray">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--champagne)" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
+                    Fast Confirmation
+                </div>
+                <div class="flex items-center gap-2 text-xs text-warm-gray">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--champagne)" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                    Flexible Scheduling
+                </div>
+                <div class="flex items-center gap-2 text-xs text-warm-gray">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--champagne)" stroke-width="2"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                    Professional Experience
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==================== FOOTER ==================== -->
+    <footer class="py-12 md:py-16 px-5 md:px-8 lg:px-12 max-w-7xl mx-auto border-t border-white/5">
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-10">
+            <!-- Brand -->
+            <div>
+                <span class="font-serif text-2xl font-bold text-ivory">Ignite<span class="text-champagne italic">.</span></span>
+                <p class="text-warm-gray text-sm mt-3 max-w-xs">Beauty Designed Around You. Premium salon experiences in the heart of the city.</p>
+                <!-- Social Icons -->
+                <div class="flex gap-4 mt-5">
+                    <a href="#" class="w-9 h-9 rounded-full border border-white/10 flex items-center justify-center text-ivory/60 hover:text-champagne hover:border-champagne/30 transition-all duration-300" aria-label="Instagram">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="5"/><circle cx="17.5" cy="6.5" r="1.5"/></svg>
+                    </a>
+                    <a href="#" class="w-9 h-9 rounded-full border border-white/10 flex items-center justify-center text-ivory/60 hover:text-champagne hover:border-champagne/30 transition-all duration-300" aria-label="Facebook">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"/></svg>
+                    </a>
+                    <a href="#" class="w-9 h-9 rounded-full border border-white/10 flex items-center justify-center text-ivory/60 hover:text-champagne hover:border-champagne/30 transition-all duration-300" aria-label="Twitter/X">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+                    </a>
+                </div>
+            </div>
+
+            <!-- Hours -->
+            <div>
+                <h4 class="font-serif text-lg font-semibold text-ivory mb-4">Opening Hours</h4>
+                <ul class="space-y-2 text-sm text-warm-gray">
+                    <li class="flex justify-between"><span>Mon — Fri</span><span class="text-ivory/80">9:00 AM — 7:00 PM</span></li>
+                    <li class="flex justify-between"><span>Saturday</span><span class="text-ivory/80">9:00 AM — 6:00 PM</span></li>
+                    <li class="flex justify-between"><span>Sunday</span><span class="text-ivory/80">11:00 AM — 5:00 PM</span></li>
+                </ul>
+            </div>
+
+            <!-- Contact -->
+            <div>
+                <h4 class="font-serif text-lg font-semibold text-ivory mb-4">Contact</h4>
+                <ul class="space-y-2 text-sm text-warm-gray">
+                    <li>📍 12 Victoria Island Avenue, Lagos</li>
+                    <li>📞 +234 800 000 0000</li>
+                    <li>✉️ hello@ignitebeauty.com</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="text-center mt-12 pt-8 border-t border-white/5">
+            <p class="text-xs text-warm-gray/60">&copy; 2026 Ignite Beauty & Luxury Salon. All rights reserved. Designed with elegance.</p>
+        </div>
+    </footer>
+
+    <!-- ==================== LIGHTBOX ==================== -->
+    <div id="lightbox">
+        <span class="close-btn">&times;</span>
+        <img src="" alt="Gallery preview" id="lightbox-img">
+    </div>
+
+    <!-- ==================== SCRIPTS ==================== -->
+    <!-- AOS Library -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js">
+    </script>
+
+    <script>
+        // ============ Initialize AOS ============
+        AOS.init({
+            duration: 800,
+            easing: 'ease-out-cubic',
+            once: false,
+            offset: 60,
+            disable: false,
+        });
+
+        // ============ Progress Bar ============
+        const progressBar = document.getElementById('progress-bar');
+        window.addEventListener('scroll', () => {
+            const scrollTop = window.scrollY;
+            const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+            const scrollPercent = docHeight > 0 ? (scrollTop / docHeight) * 100 : 0;
+            progressBar.style.width = Math.min(scrollPercent, 100) + '%';
+        });
+
+        // ============ Navbar Scroll Effect ============
+        const navbar = document.getElementById('navbar');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 60) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
+
+        // ============ Mobile Menu ============
+        const hamburger = document.getElementById('hamburger');
+        const mobileMenu = document.getElementById('mobile-menu');
+        const hamLine1 = document.getElementById('ham-line1');
+        const hamLine2 = document.getElementById('ham-line2');
+        const hamLine3 = document.getElementById('ham-line3');
+        const mobileNavLinks = document.querySelectorAll('.mobile-nav-link');
+        let menuOpen = false;
+
+        function toggleMenu() {
+            menuOpen = !menuOpen;
+            if (menuOpen) {
+                mobileMenu.classList.add('active');
+                hamLine1.style.transform = 'rotate(45deg) translate(5px, 5px)';
+                hamLine2.style.opacity = '0';
+                hamLine3.style.transform = 'rotate(-45deg) translate(5px, -5px)';
+                hamLine3.style.width = '1.75rem';
+                document.body.style.overflow = 'hidden';
+            } else {
+                mobileMenu.classList.remove('active');
+                hamLine1.style.transform = 'rotate(0) translate(0, 0)';
+                hamLine2.style.opacity = '1';
+                hamLine3.style.transform = 'rotate(0) translate(0, 0)';
+                hamLine3.style.width = '1.25rem';
+                document.body.style.overflow = '';
+            }
+        }
+
+        hamburger.addEventListener('click', toggleMenu);
+        mobileNavLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                if (menuOpen) toggleMenu();
+            });
+        });
+
+        // ============ Counter Animation ============
+        const counters = document.querySelectorAll('.counter-value');
+        let countersAnimated = false;
+
+        function animateCounter(el) {
+            const target = parseInt(el.getAttribute('data-target'));
+            const suffix = el.getAttribute('data-suffix') || '';
+            const duration = 2200;
+            const startTime = performance.now();
+
+            function update(now) {
+                const elapsed = now - startTime;
+                const progress = Math.min(elapsed / duration, 1);
+                // Ease-out curve
+                const eased = 1 - Math.pow(1 - progress, 3);
+                const current = Math.floor(eased * target);
+                el.textContent = current.toLocaleString() + suffix;
+                if (progress < 1) {
+                    requestAnimationFrame(update);
+                } else {
+                    el.textContent = target.toLocaleString() + suffix;
+                }
+            }
+            requestAnimationFrame(update);
+        }
+
+        const counterObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting && !countersAnimated) {
+                    countersAnimated = true;
+                    counters.forEach(c => animateCounter(c));
+                    counterObserver.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.4 });
+
+        const counterSection = document.querySelector('.counter-value')?.closest('.glass-card');
+        if (counterSection) {
+            counterObserver.observe(counterSection);
+        }
+
+        // ============ Lightbox ============
+        const lightbox = document.getElementById('lightbox');
+        const lightboxImg = document.getElementById('lightbox-img');
+        const lightboxClose = lightbox.querySelector('.close-btn');
+        const galleryImages = document.querySelectorAll('.gallery-img img');
+
+        galleryImages.forEach(img => {
+            img.parentElement.addEventListener('click', (e) => {
+                const src = img.getAttribute('src');
+                // Use a larger version if possible
+                const highResSrc = src.replace(/w=\d+/, 'w=1200');
+                lightboxImg.src = highResSrc;
+                lightbox.classList.add('active');
+                document.body.style.overflow = 'hidden';
+            });
+        });
+
+        function closeLightbox() {
+            lightbox.classList.remove('active');
+            document.body.style.overflow = '';
+            lightboxImg.src = '';
+        }
+
+        lightboxClose.addEventListener('click', (e) => {
+            e.stopPropagation();
+            closeLightbox();
+        });
+        lightbox.addEventListener('click', (e) => {
+            if (e.target === lightbox) closeLightbox();
+        });
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && lightbox.classList.contains('active')) {
+                closeLightbox();
+            }
+        });
+
+        // ============ Booking Form Submission ============
+        const bookingForm = document.getElementById('booking-form');
+        bookingForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            // Simple feedback animation
+            const submitBtn = bookingForm.querySelector('button[type="submit"]');
+            const originalText = submitBtn.innerHTML;
+            submitBtn.innerHTML =
+                '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> Booked!';
+            submitBtn.style.background = 'linear-gradient(135deg, #2d5a27, #3d7a35)';
+            submitBtn.style.color = '#fff';
+            setTimeout(() => {
+                submitBtn.innerHTML = originalText;
+                submitBtn.style.background = '';
+                submitBtn.style.color = '';
+                bookingForm.reset();
+            }, 2500);
+        });
+
+        // ============ Smooth scroll for all anchor links ============
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                const href = this.getAttribute('href');
+                if (href === '#') return;
+                const target = document.querySelector(href);
+                if (target) {
+                    e.preventDefault();
+                    const navHeight = navbar.offsetHeight + 20;
+                    const targetPosition = target.getBoundingClientRect().top + window.scrollY -
+                        navHeight;
+                    window.scrollTo({
+                        top: targetPosition,
+                        behavior: 'smooth',
+                    });
+                }
+            });
+        });
+
+        // ============ Parallax-like effect on hero glow ============
+        const heroGlows = document.querySelectorAll('.hero-glow');
+        window.addEventListener('scroll', () => {
+            const scrollY = window.scrollY;
+            heroGlows.forEach((glow, index) => {
+                const speed = (index + 1) * 0.03;
+                glow.style.transform = `translateY(${scrollY * speed}px)`;
+            });
+        });
+
+        console.log('%c✨ Ignite Beauty & Luxury Salon %c— Premium Experience Ready',
+            'font-family: Playfair Display, serif; font-size: 1.4rem; color: #c9a96e;',
+            'font-family: Inter, sans-serif; font-size: 0.85rem; color: #8a8580;');
+    </script>
+</body>
+</html>
