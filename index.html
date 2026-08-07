@@ -1,2302 +1,860 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <title>X's Nails Tech — Luxury Nail Studio • Lagos</title>
-    <meta name="description" content="Luxury nail artistry in Lagos. Premium manicures, pedicures, acrylic sets, custom nail art and bridal nail styling. Book your appointment today.">
-    <meta name="theme-color" content="#0A0A0A">
-
-    <!-- Google Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400;1,500&family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&display=swap" rel="stylesheet">
-
-    <!-- Tailwind CSS CDN -->
-    <script src="https://cdn.tailwindcss.com"></script>
-
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    colors: {
-                        champagne: '#C9A96E',
-                        'champagne-dark': '#B8924E',
-                        'soft-nude': '#E8D5C4',
-                        'deep-black': '#000000',
-                        'soft-black': '#0A0A0A',
-                        'card-black': '#111111',
-                        'warm-gray': '#B7B0A8'
-                    },
-
-                    fontFamily: {
-                        display: ['"Playfair Display"', '"Cormorant Garamond"', 'Georgia', 'serif'],
-                        body: ['"Inter"', 'system-ui', 'sans-serif']
-                    },
-
-                    animation: {
-                        'float-slow': 'floatSlow 6s ease-in-out infinite',
-                        'fade-in-up': 'fadeInUp 0.8s ease-out forwards'
-                    },
-
-                    keyframes: {
-                        floatSlow: {
-                            '0%, 100%': {
-                                transform: 'translateY(0)'
-                            },
-                            '50%': {
-                                transform: 'translateY(-8px)'
-                            }
-                        },
-
-                        fadeInUp: {
-                            '0%': {
-                                opacity: '0',
-                                transform: 'translateY(24px)'
-                            },
-                            '100%': {
-                                opacity: '1',
-                                transform: 'translateY(0)'
-                            }
-                        }
-                    }
-                }
-            }
-        }
-    </script>
-
-    <!-- AOS -->
-    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
-
-    <style>
-        html {
-            scroll-behavior: smooth;
-            -webkit-font-smoothing: antialiased;
-        }
-
-        body {
-            font-family: 'Inter', system-ui, sans-serif;
-            background: #0A0A0A;
-            color: #F5F5F0;
-            overflow-x: hidden;
-        }
-
-        body.menu-open {
-            overflow: hidden;
-        }
-
-        ::selection {
-            background: #C9A96E;
-            color: #0A0A0A;
-        }
-
-        /* =========================
-           NAVBAR
-        ========================= */
-
-        #navbar {
-            transition:
-                background-color 0.4s ease,
-                backdrop-filter 0.4s ease,
-                box-shadow 0.4s ease,
-                border-color 0.4s ease;
-            background-color: transparent;
-        }
-
-        .navbar-scrolled {
-            background-color: rgba(10, 10, 10, 0.92) !important;
-            backdrop-filter: blur(18px) !important;
-            -webkit-backdrop-filter: blur(18px) !important;
-            box-shadow: 0 1px 24px rgba(0, 0, 0, 0.4) !important;
-            border-bottom: 1px solid rgba(201, 169, 110, 0.18) !important;
-        }
-
-        /* =========================
-           HERO
-        ========================= */
-
-        .hero-image-wrapper {
-            position: relative;
-            overflow: hidden;
-            border-radius: 1.5rem;
-        }
-
-        .hero-image-wrapper::after {
-            content: "";
-            position: absolute;
-            inset: 0;
-            background: linear-gradient(
-                135deg,
-                rgba(0, 0, 0, 0.08),
-                transparent 45%,
-                rgba(0, 0, 0, 0.22)
-            );
-            pointer-events: none;
-        }
-
-        .hero-image-wrapper img {
-            transition: transform 0.8s cubic-bezier(0.25, 0.1, 0.25, 1);
-        }
-
-        .hero-image-wrapper:hover img {
-            transform: scale(1.025);
-        }
-
-        .hero-meta {
-            background: rgba(10, 10, 10, 0.86);
-            backdrop-filter: blur(16px);
-            -webkit-backdrop-filter: blur(16px);
-            border: 1px solid rgba(201, 169, 110, 0.3);
-        }
-
-        /* =========================
-           PARALLAX
-        ========================= */
-
-        .parallax-section {
-            background-size: cover;
-            background-position: center 30%;
-            background-repeat: no-repeat;
-            will-change: background-position;
-        }
-
-        .parallax-overlay {
-            position: absolute;
-            inset: 0;
-            background:
-                linear-gradient(
-                    90deg,
-                    rgba(0, 0, 0, 0.78),
-                    rgba(0, 0, 0, 0.48),
-                    rgba(0, 0, 0, 0.72)
-                );
-            z-index: 1;
-            pointer-events: none;
-        }
-
-        .parallax-content {
-            position: relative;
-            z-index: 2;
-        }
-
-        /* =========================
-           GENERAL
-        ========================= */
-
-        .eyebrow {
-            font-size: 0.72rem;
-            letter-spacing: 0.2em;
-            text-transform: uppercase;
-            color: #C9A96E;
-            font-weight: 600;
-        }
-
-        .section-rule {
-            width: 48px;
-            height: 1px;
-            background: #C9A96E;
-            margin: 1.25rem auto 0;
-        }
-
-        /* =========================
-           SERVICE CARDS
-        ========================= */
-
-        .service-card {
-            position: relative;
-            background: #141414;
-            border: 1px solid #292929;
-            transition:
-                transform 0.4s ease,
-                border-color 0.4s ease,
-                box-shadow 0.4s ease;
-        }
-
-        .service-card:hover {
-            transform: translateY(-5px);
-            border-color: rgba(201, 169, 110, 0.7);
-            box-shadow: 0 24px 48px rgba(0, 0, 0, 0.45);
-        }
-
-        .service-number {
-            font-family: 'Cormorant Garamond', serif;
-            color: rgba(201, 169, 110, 0.7);
-            font-size: 2rem;
-            line-height: 1;
-        }
-
-        /* =========================
-           PORTFOLIO
-        ========================= */
-
-        .masonry-grid {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            grid-auto-rows: 190px;
-            gap: 14px;
-        }
-
-        .masonry-item {
-            position: relative;
-            overflow: hidden;
-            cursor: pointer;
-            border-radius: 0.85rem;
-            background: #151515;
-        }
-
-        .masonry-item:nth-child(1) {
-            grid-column: span 2;
-            grid-row: span 2;
-        }
-
-        .masonry-item:nth-child(4) {
-            grid-column: span 2;
-            grid-row: span 1;
-        }
-
-        .masonry-item img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            transition: transform 0.7s cubic-bezier(0.25, 0.1, 0.25, 1);
-        }
-
-        .masonry-item:hover img {
-            transform: scale(1.055);
-        }
-
-        .masonry-item::after {
-            content: "View";
-            position: absolute;
-            inset: auto 14px 14px auto;
-            padding: 7px 12px;
-            font-size: 0.68rem;
-            text-transform: uppercase;
-            letter-spacing: 0.12em;
-            color: #fff;
-            background: rgba(10, 10, 10, 0.72);
-            backdrop-filter: blur(8px);
-            border: 1px solid rgba(255, 255, 255, 0.15);
-            opacity: 0;
-            transform: translateY(5px);
-            transition: all 0.3s ease;
-        }
-
-        .masonry-item:hover::after {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        .portfolio-filter {
-            transition: all 0.25s ease;
-        }
-
-        .portfolio-filter.active,
-        .portfolio-filter:hover {
-            background: #C9A96E;
-            color: #0A0A0A;
-            border-color: #C9A96E;
-        }
-
-        /* =========================
-           ABOUT
-        ========================= */
-
-        .about-image {
-            overflow: hidden;
-            border-radius: 1.25rem;
-        }
-
-        .about-image img {
-            transition: transform 0.7s ease;
-        }
-
-        .about-image:hover img {
-            transform: scale(1.025);
-        }
-
-        /* =========================
-           REVIEWS
-        ========================= */
-
-        .review-card {
-            background: #171717;
-            border: 1px solid rgba(255, 255, 255, 0.08);
-            transition: transform 0.3s ease, border-color 0.3s ease;
-        }
-
-        .review-card:hover {
-            transform: translateY(-4px);
-            border-color: rgba(201, 169, 110, 0.3);
-        }
-
-        /* =========================
-           BOOKING
-        ========================= */
-
-        input,
-        select,
-        textarea {
-            transition:
-                border-color 0.25s ease,
-                box-shadow 0.25s ease;
-        }
-
-        input:focus,
-        select:focus,
-        textarea:focus {
-            outline: none;
-            border-color: #C9A96E !important;
-            box-shadow: 0 0 0 3px rgba(201, 169, 110, 0.14) !important;
-        }
-
-        input:user-invalid,
-        select:user-invalid,
-        textarea:user-invalid {
-            border-color: #b85c5c;
-        }
-
-        .booking-notice {
-            background: rgba(201, 169, 110, 0.07);
-            border: 1px solid rgba(201, 169, 110, 0.2);
-        }
-
-        /* =========================
-           LIGHTBOX
-        ========================= */
-
-        .lightbox {
-            position: fixed;
-            inset: 0;
-            z-index: 100;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding: 1.5rem;
-            background: rgba(0, 0, 0, 0.94);
-            opacity: 0;
-            visibility: hidden;
-            transition:
-                opacity 0.3s ease,
-                visibility 0.3s ease;
-        }
-
-        .lightbox.open {
-            opacity: 1;
-            visibility: visible;
-        }
-
-        .lightbox img {
-            max-width: min(1100px, 92vw);
-            max-height: 84vh;
-            object-fit: contain;
-            border-radius: 0.75rem;
-            transform: scale(0.96);
-            transition: transform 0.35s ease;
-        }
-
-        .lightbox.open img {
-            transform: scale(1);
-        }
-
-        .lightbox-close {
-            position: absolute;
-            top: 1.25rem;
-            right: 1.25rem;
-            width: 44px;
-            height: 44px;
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            background: rgba(20, 20, 20, 0.8);
-            border-radius: 50%;
-            color: white;
-            font-size: 1.5rem;
-            cursor: pointer;
-        }
-
-        /* =========================
-           MOBILE NAV
-        ========================= */
-
-        .mobile-nav {
-            transform: translateY(-110%);
-            transition: transform 0.45s cubic-bezier(0.25, 0.1, 0.25, 1);
-            position: fixed;
-            inset: 0;
-            background: rgba(10, 10, 10, 0.98);
-            backdrop-filter: blur(24px);
-            -webkit-backdrop-filter: blur(24px);
-            z-index: 50;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            gap: 28px;
-        }
-
-        .mobile-nav.open {
-            transform: translateY(0);
-        }
-
-        /* =========================
-           REDUCED MOTION
-        ========================= */
-
-        @media (prefers-reduced-motion: reduce) {
-            html {
-                scroll-behavior: auto;
-            }
-
-            *,
-            *::before,
-            *::after {
-                animation-duration: 0.01ms !important;
-                animation-iteration-count: 1 !important;
-                transition-duration: 0.01ms !important;
-            }
-        }
-
-        /* =========================
-           RESPONSIVE
-        ========================= */
-
-        @media (max-width: 1024px) {
-            .masonry-grid {
-                grid-template-columns: repeat(3, 1fr);
-                grid-auto-rows: 170px;
-            }
-
-            .masonry-item:nth-child(1) {
-                grid-column: span 2;
-                grid-row: span 2;
-            }
-
-            .masonry-item:nth-child(4) {
-                grid-column: span 2;
-            }
-        }
-
-        @media (max-width: 640px) {
-            .masonry-grid {
-                grid-template-columns: repeat(2, 1fr);
-                grid-auto-rows: 140px;
-                gap: 8px;
-            }
-
-            .masonry-item:nth-child(1) {
-                grid-column: span 2;
-                grid-row: span 2;
-            }
-
-            .masonry-item:nth-child(4) {
-                grid-column: span 2;
-            }
-
-            .masonry-item::after {
-                display: none;
-            }
-
-            .parallax-section {
-                background-position: center;
-            }
-        }
-    </style>
-</head>
-
-<body class="bg-[#0A0A0A] text-white font-body">
-
-    <!-- =========================================================
-         NAVBAR
-    ========================================================== -->
-
-    <nav
-        id="navbar"
-        class="fixed top-0 left-0 right-0 z-50 px-5 sm:px-6 lg:px-12 py-4 flex items-center justify-between border-b border-transparent"
-        aria-label="Main navigation"
-    >
-        <a
-            href="#home"
-            class="font-display text-2xl md:text-3xl font-semibold tracking-wide text-white hover:text-[#C9A96E] transition-colors duration-300"
-        >
-            X's Nails Tech
-        </a>
-
-        <div class="hidden lg:flex items-center gap-8 text-sm font-medium tracking-wider uppercase text-white/80">
-            <a href="#home" class="hover:text-[#C9A96E] transition-colors">Home</a>
-            <a href="#services" class="hover:text-[#C9A96E] transition-colors">Services</a>
-            <a href="#portfolio" class="hover:text-[#C9A96E] transition-colors">Portfolio</a>
-            <a href="#reviews" class="hover:text-[#C9A96E] transition-colors">Reviews</a>
-            <a
-                href="#book"
-                class="px-5 py-2.5 bg-[#C9A96E] text-black font-semibold rounded-full hover:bg-[#D4B896] transition-all duration-300"
-            >
-                Book Appointment
-            </a>
-        </div>
-
-        <button
-            id="hamburger-btn"
-            type="button"
-            class="lg:hidden z-[60] p-2"
-            aria-label="Open navigation menu"
-            aria-expanded="false"
-            aria-controls="mobile-nav"
-        >
-            <svg width="26" height="20" viewBox="0 0 26 20" fill="none" aria-hidden="true">
-                <rect id="bar1" y="0" width="26" height="2.5" rx="1.25" fill="white"/>
-                <rect id="bar2" y="8.75" width="26" height="2.5" rx="1.25" fill="white"/>
-                <rect id="bar3" y="17.5" width="26" height="2.5" rx="1.25" fill="white"/>
-            </svg>
-        </button>
-    </nav>
-
-    <!-- MOBILE NAV -->
-
-    <div
-        id="mobile-nav"
-        class="mobile-nav lg:hidden"
-        aria-hidden="true"
-    >
-        <a href="#home" class="text-2xl font-display font-medium text-white hover:text-[#C9A96E] mobile-nav-link">
-            Home
-        </a>
-
-        <a href="#services" class="text-2xl font-display font-medium text-white hover:text-[#C9A96E] mobile-nav-link">
-            Services
-        </a>
-
-        <a href="#portfolio" class="text-2xl font-display font-medium text-white hover:text-[#C9A96E] mobile-nav-link">
-            Portfolio
-        </a>
-
-        <a href="#about" class="text-2xl font-display font-medium text-white hover:text-[#C9A96E] mobile-nav-link">
-            About
-        </a>
-
-        <a href="#reviews" class="text-2xl font-display font-medium text-white hover:text-[#C9A96E] mobile-nav-link">
-            Reviews
-        </a>
-
-        <a
-            href="#book"
-            class="mt-4 px-8 py-3 bg-[#C9A96E] text-black rounded-full font-semibold text-lg mobile-nav-link"
-        >
-            Book Appointment
-        </a>
-    </div>
-
-
-    <!-- =========================================================
-         HERO
-    ========================================================== -->
-
-    <section
-        id="home"
-        class="relative min-h-screen flex items-center pt-28 pb-16 px-5 sm:px-6 lg:px-12 overflow-hidden"
-    >
-        <div class="max-w-7xl mx-auto w-full grid grid-cols-1 lg:grid-cols-[1fr_1.05fr] gap-12 lg:gap-16 items-center">
-
-            <!-- TEXT -->
-
-            <div
-                class="order-2 lg:order-1"
-                data-aos="fade-right"
-                data-aos-duration="900"
-            >
-                <span class="eyebrow">
-                    Luxury Nail Studio • Lagos
-                </span>
-
-                <h1 class="font-display text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-semibold leading-[1.05] text-white mt-4 mb-6">
-                    Nails Worth<br>
-                    Slowing Down For<span class="text-[#C9A96E]">.</span>
-                </h1>
-
-                <p class="text-base md:text-lg text-[#B7B0A8] leading-relaxed max-w-xl mb-8">
-                    Refined nail artistry, thoughtful care, and a beautifully considered appointment experience in Lagos.
-                </p>
-
-                <div class="flex flex-wrap gap-4">
-                    <a
-                        href="#book"
-                        class="px-7 py-3.5 bg-[#C9A96E] text-black rounded-full font-semibold text-sm md:text-base tracking-wide hover:bg-[#D4B896] transition-all duration-300"
-                    >
-                        Book Appointment
-                    </a>
-
-                    <a
-                        href="#portfolio"
-                        class="px-7 py-3.5 border border-[#C9A96E] text-[#C9A96E] rounded-full font-semibold text-sm md:text-base tracking-wide hover:bg-[#C9A96E] hover:text-black transition-all duration-300"
-                    >
-                        View Work
-                    </a>
-                </div>
-
-                <div class="flex flex-wrap gap-x-6 gap-y-2 mt-8 text-xs text-white/55 uppercase tracking-wider">
-                    <span>By Appointment</span>
-                    <span>•</span>
-                    <span>Lagos, Nigeria</span>
-                    <span>•</span>
-                    <span>Tue–Sat</span>
-                </div>
-            </div>
-
-
-            <!-- IMAGE -->
-
-            <div
-                class="order-1 lg:order-2 relative"
-                data-aos="fade-left"
-                data-aos-duration="900"
-            >
-                <div class="relative w-full max-w-2xl ml-auto">
-
-                    <div class="hero-image-wrapper shadow-2xl">
-                        <img
-                            src="https://images.unsplash.com/photo-1604654894610-df63bc536371?w=1100&h=850&fit=crop&crop=center&auto=format&q=88"
-                            alt="Luxury nail art close-up"
-                            class="w-full h-[430px] sm:h-[520px] lg:h-[620px] object-cover"
-                            loading="eager"
-                            fetchpriority="high"
-                        >
-                    </div>
-
-                    <div class="hero-meta absolute bottom-5 left-5 sm:left-auto sm:right-5 rounded-full px-4 sm:px-5 py-3 flex items-center gap-3">
-                        <span class="text-[#C9A96E] text-sm tracking-widest">
-                            ★★★★★
-                        </span>
-
-                        <span class="text-xs font-medium text-white whitespace-nowrap">
-                            Premium Nail Artistry
-                        </span>
-                    </div>
-
-                </div>
-            </div>
-
-        </div>
-    </section>
-
-
-    <!-- =========================================================
-         EXPERIENCE
-    ========================================================== -->
-
-    <section
-        id="experience"
-        class="parallax-section relative h-[70vh] md:h-[75vh] flex items-center justify-center text-center px-6"
-        style="background-image: url('https://images.unsplash.com/photo-1560869713-7d0a29e28c2b?w=1600&h=900&fit=crop&auto=format&q=82');"
-    >
-
-        <div class="parallax-overlay"></div>
-
-        <div
-            class="parallax-content max-w-3xl mx-auto"
-            data-aos="fade-up"
-            data-aos-duration="1000"
-        >
-            <span class="eyebrow">
-                The Experience
-            </span>
-
-            <h2 class="font-display text-4xl sm:text-5xl md:text-6xl font-semibold text-white mt-4 mb-5 leading-tight">
-                Luxury Is In The Details<span class="text-[#C9A96E]">.</span>
-            </h2>
-
-            <p class="text-white/80 text-lg md:text-xl mb-8 leading-relaxed font-light max-w-2xl mx-auto">
-                From the first consultation to the final detail, every appointment is designed around precision, comfort, and your personal style.
-            </p>
-
-            <a
-                href="#book"
-                class="inline-block px-8 py-3.5 bg-[#C9A96E] text-black rounded-full font-semibold text-base hover:bg-[#D4B896] transition-all duration-300"
-            >
-                Reserve Your Session
-            </a>
-        </div>
-
-    </section>
-
-
-    <!-- =========================================================
-         SERVICES
-    ========================================================== -->
-
-    <section
-        id="services"
-        class="py-24 md:py-32 px-5 sm:px-6 lg:px-12 bg-[#0A0A0A]"
-    >
-        <div class="max-w-7xl mx-auto">
-
-            <div
-                class="text-center mb-16"
-                data-aos="fade-up"
-                data-aos-duration="700"
-            >
-                <span class="eyebrow">What We Offer</span>
-
-                <h2 class="font-display text-3xl sm:text-4xl md:text-5xl font-semibold text-white mt-3">
-                    Signature Services
-                </h2>
-
-                <div class="section-rule"></div>
-            </div>
-
-
-            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-px bg-[#292929] border border-[#292929]">
-
-                <!-- SERVICE 1 -->
-
-                <article
-                    class="service-card p-7 md:p-8"
-                    data-aos="fade-up"
-                    data-aos-duration="600"
-                >
-                    <span class="service-number">01</span>
-
-                    <h3 class="font-display text-2xl font-semibold text-white mt-5 mb-3">
-                        Gel Manicure
-                    </h3>
-
-                    <p class="text-[#B7B0A8] text-sm leading-relaxed mb-6">
-                        A polished, long-lasting finish with careful shaping, cuticle care, and a clean refined result.
-                    </p>
-
-                    <div class="flex items-center justify-between border-t border-white/10 pt-4">
-                        <span class="text-xs text-white/50">Approx. 60 min</span>
-                        <span class="text-sm text-[#C9A96E]">From ₦18,000</span>
-                    </div>
-                </article>
-
-
-                <!-- SERVICE 2 -->
-
-                <article
-                    class="service-card p-7 md:p-8"
-                    data-aos="fade-up"
-                    data-aos-duration="600"
-                    data-aos-delay="100"
-                >
-                    <span class="service-number">02</span>
-
-                    <h3 class="font-display text-2xl font-semibold text-white mt-5 mb-3">
-                        Luxury Pedicure
-                    </h3>
-
-                    <p class="text-[#B7B0A8] text-sm leading-relaxed mb-6">
-                        A relaxing foot-care ritual combining exfoliation, detailed grooming, massage, and a polished finish.
-                    </p>
-
-                    <div class="flex items-center justify-between border-t border-white/10 pt-4">
-                        <span class="text-xs text-white/50">Approx. 60 min</span>
-                        <span class="text-sm text-[#C9A96E]">From ₦20,000</span>
-                    </div>
-                </article>
-
-
-                <!-- SERVICE 3 -->
-
-                <article
-                    class="service-card p-7 md:p-8"
-                    data-aos="fade-up"
-                    data-aos-duration="600"
-                    data-aos-delay="200"
-                >
-                    <span class="service-number">03</span>
-
-                    <h3 class="font-display text-2xl font-semibold text-white mt-5 mb-3">
-                        Acrylic Sets
-                    </h3>
-
-                    <p class="text-[#B7B0A8] text-sm leading-relaxed mb-6">
-                        Sculpted extensions tailored to your preferred length, shape, and finish with a focus on clean structure.
-                    </p>
-
-                    <div class="flex items-center justify-between border-t border-white/10 pt-4">
-                        <span class="text-xs text-white/50">90–120 min</span>
-                        <span class="text-sm text-[#C9A96E]">From ₦25,000</span>
-                    </div>
-                </article>
-
-
-                <!-- SERVICE 4 -->
-
-                <article
-                    class="service-card p-7 md:p-8"
-                    data-aos="fade-up"
-                    data-aos-duration="600"
-                    data-aos-delay="150"
-                >
-                    <span class="service-number">04</span>
-
-                    <h3 class="font-display text-2xl font-semibold text-white mt-5 mb-3">
-                        Custom Nail Art
-                    </h3>
-
-                    <p class="text-[#B7B0A8] text-sm leading-relaxed mb-6">
-                        Bespoke designs ranging from understated details to expressive statement sets created around your style.
-                    </p>
-
-                    <div class="flex items-center justify-between border-t border-white/10 pt-4">
-                        <span class="text-xs text-white/50">Varies by design</span>
-                        <span class="text-sm text-[#C9A96E]">From ₦5,000</span>
-                    </div>
-                </article>
-
-
-                <!-- SERVICE 5 -->
-
-                <article
-                    class="service-card p-7 md:p-8"
-                    data-aos="fade-up"
-                    data-aos-duration="600"
-                    data-aos-delay="250"
-                >
-                    <span class="service-number">05</span>
-
-                    <h3 class="font-display text-2xl font-semibold text-white mt-5 mb-3">
-                        Bridal Nail Styling
-                    </h3>
-
-                    <p class="text-[#B7B0A8] text-sm leading-relaxed mb-6">
-                        A considered bridal nail experience including design consultation, trial options, and wedding-day styling.
-                    </p>
-
-                    <div class="flex items-center justify-between border-t border-white/10 pt-4">
-                        <span class="text-xs text-white/50">By consultation</span>
-                        <span class="text-sm text-[#C9A96E]">Enquire</span>
-                    </div>
-                </article>
-
-
-                <!-- SERVICE 6 -->
-
-                <article
-                    class="service-card p-7 md:p-8"
-                    data-aos="fade-up"
-                    data-aos-duration="600"
-                    data-aos-delay="300"
-                >
-                    <span class="service-number">06</span>
-
-                    <h3 class="font-display text-2xl font-semibold text-white mt-5 mb-3">
-                        Express Session
-                    </h3>
-
-                    <p class="text-[#B7B0A8] text-sm leading-relaxed mb-6">
-                        A streamlined appointment for clients who want beautiful, well-finished nails without the longer session.
-                    </p>
-
-                    <div class="flex items-center justify-between border-t border-white/10 pt-4">
-                        <span class="text-xs text-white/50">Approx. 45 min</span>
-                        <span class="text-sm text-[#C9A96E]">From ₦12,000</span>
-                    </div>
-                </article>
-
-            </div>
-
-            <p class="text-center text-xs text-white/40 mt-6">
-                * Prices shown are starting prices and may vary depending on length, design, removal, and additional services.
-            </p>
-
-        </div>
-    </section>
-
-
-    <!-- =========================================================
-         PORTFOLIO
-    ========================================================== -->
-
-    <section
-        id="portfolio"
-        class="py-24 md:py-32 px-5 sm:px-6 lg:px-12 bg-[#0A0A0A]"
-    >
-        <div class="max-w-7xl mx-auto">
-
-            <div
-                class="text-center mb-12"
-                data-aos="fade-up"
-                data-aos-duration="700"
-            >
-                <span class="eyebrow">The Portfolio</span>
-
-                <h2 class="font-display text-3xl sm:text-4xl md:text-5xl font-semibold text-white mt-3">
-                    Recent Work
-                </h2>
-
-                <div class="section-rule"></div>
-
-                <p class="text-[#B7B0A8] max-w-xl mx-auto mt-5 text-sm md:text-base leading-relaxed">
-                    A selection of nail designs across minimal, bridal, editorial, and statement styles.
-                </p>
-            </div>
-
-
-            <!-- FILTERS -->
-
-            <div
-                class="flex flex-wrap justify-center gap-2 mb-10"
-                data-aos="fade-up"
-                data-aos-duration="600"
-            >
-                <button
-                    type="button"
-                    class="portfolio-filter active px-4 py-2 rounded-full border border-white/10 bg-[#1A1A1A] text-xs uppercase tracking-widest"
-                    data-filter="all"
-                >
-                    All
-                </button>
-
-                <button
-                    type="button"
-                    class="portfolio-filter px-4 py-2 rounded-full border border-white/10 bg-[#1A1A1A] text-[#B7B0A8] text-xs uppercase tracking-widest"
-                    data-filter="minimal"
-                >
-                    Minimal
-                </button>
-
-                <button
-                    type="button"
-                    class="portfolio-filter px-4 py-2 rounded-full border border-white/10 bg-[#1A1A1A] text-[#B7B0A8] text-xs uppercase tracking-widest"
-                    data-filter="bridal"
-                >
-                    Bridal
-                </button>
-
-                <button
-                    type="button"
-                    class="portfolio-filter px-4 py-2 rounded-full border border-white/10 bg-[#1A1A1A] text-[#B7B0A8] text-xs uppercase tracking-widest"
-                    data-filter="editorial"
-                >
-                    Editorial
-                </button>
-
-                <button
-                    type="button"
-                    class="portfolio-filter px-4 py-2 rounded-full border border-white/10 bg-[#1A1A1A] text-[#B7B0A8] text-xs uppercase tracking-widest"
-                    data-filter="luxury"
-                >
-                    Luxury
-                </button>
-            </div>
-
-
-            <!-- GALLERY -->
-
-            <div class="masonry-grid">
-
-                <button
-                    type="button"
-                    class="masonry-item portfolio-item text-left"
-                    data-category="editorial"
-                    data-image="https://images.unsplash.com/photo-1607779097040-26e80aa78e66?w=1200&h=1000&fit=crop&auto=format&q=88"
-                    data-title="Editorial Set"
-                    data-aos="zoom-in"
-                    data-aos-duration="700"
-                >
-                    <img
-                        src="https://images.unsplash.com/photo-1607779097040-26e80aa78e66?w=800&h=700&fit=crop&auto=format&q=85"
-                        alt="Editorial nail design"
-                        loading="lazy"
-                    >
-                </button>
-
-
-                <button
-                    type="button"
-                    class="masonry-item portfolio-item text-left"
-                    data-category="minimal"
-                    data-image="https://images.unsplash.com/photo-1632345031435-8727f6897d53?w=1000&h=800&fit=crop&auto=format&q=88"
-                    data-title="Minimal Set"
-                    data-aos="zoom-in"
-                    data-aos-duration="700"
-                    data-aos-delay="100"
-                >
-                    <img
-                        src="https://images.unsplash.com/photo-1632345031435-8727f6897d53?w=600&h=500&fit=crop&auto=format&q=85"
-                        alt="Minimal nail design"
-                        loading="lazy"
-                    >
-                </button>
-
-
-                <button
-                    type="button"
-                    class="masonry-item portfolio-item text-left"
-                    data-category="bridal"
-                    data-image="https://images.unsplash.com/photo-1604654894610-df63bc536371?w=1000&h=800&fit=crop&auto=format&q=88"
-                    data-title="Bridal Set"
-                    data-aos="zoom-in"
-                    data-aos-duration="700"
-                    data-aos-delay="150"
-                >
-                    <img
-                        src="https://images.unsplash.com/photo-1604654894610-df63bc536371?w=600&h=500&fit=crop&auto=format&q=85"
-                        alt="Bridal nail design"
-                        loading="lazy"
-                    >
-                </button>
-
-
-                <button
-                    type="button"
-                    class="masonry-item portfolio-item text-left"
-                    data-category="luxury"
-                    data-image="https://images.unsplash.com/photo-1560869713-7d0a29e28c2b?w=1200&h=700&fit=crop&auto=format&q=88"
-                    data-title="Luxury Set"
-                    data-aos="zoom-in"
-                    data-aos-duration="700"
-                    data-aos-delay="200"
-                >
-                    <img
-                        src="https://images.unsplash.com/photo-1560869713-7d0a29e28c2b?w=800&h=450&fit=crop&auto=format&q=85"
-                        alt="Luxury nail design"
-                        loading="lazy"
-                    >
-                </button>
-
-
-                <button
-                    type="button"
-                    class="masonry-item portfolio-item text-left"
-                    data-category="minimal"
-                    data-image="https://images.unsplash.com/photo-1610992015732-2449b76344bc?w=1000&h=800&fit=crop&auto=format&q=88"
-                    data-title="Clean Minimal Set"
-                    data-aos="zoom-in"
-                    data-aos-duration="700"
-                    data-aos-delay="250"
-                >
-                    <img
-                        src="https://images.unsplash.com/photo-1610992015732-2449b76344bc?w=600&h=500&fit=crop&auto=format&q=85"
-                        alt="Clean minimal manicure"
-                        loading="lazy"
-                    >
-                </button>
-
-
-                <button
-                    type="button"
-                    class="masonry-item portfolio-item text-left"
-                    data-category="luxury"
-                    data-image="https://images.unsplash.com/photo-1519014816548-bf5fe059798b?w=1000&h=800&fit=crop&auto=format&q=88"
-                    data-title="Statement Set"
-                    data-aos="zoom-in"
-                    data-aos-duration="700"
-                    data-aos-delay="300"
-                >
-                    <img
-                        src="https://images.unsplash.com/photo-1519014816548-bf5fe059798b?w=600&h=500&fit=crop&auto=format&q=85"
-                        alt="Statement nail design"
-                        loading="lazy"
-                    >
-                </button>
-
-            </div>
-
-            <p class="text-center text-xs text-white/35 mt-8">
-                Portfolio imagery should be replaced with the nail artist's actual client work before launch.
-            </p>
-
-        </div>
-    </section>
-
-
-    <!-- =========================================================
-         ABOUT
-    ========================================================== -->
-
-    <section
-        id="about"
-        class="py-24 md:py-32 px-5 sm:px-6 lg:px-12 bg-[#111111]"
-    >
-        <div class="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center">
-
-            <div
-                class="about-image"
-                data-aos="fade-right"
-                data-aos-duration="800"
-            >
-                <img
-                    src="https://images.unsplash.com/photo-1487412720507-e7ab37603c6f?w=1000&h=1100&fit=crop&auto=format&q=85"
-                    alt="Nail artist in her studio"
-                    class="w-full h-[500px] md:h-[650px] object-cover"
-                    loading="lazy"
-                >
-            </div>
-
-
-            <div
-                data-aos="fade-left"
-                data-aos-duration="800"
-            >
-                <span class="eyebrow">Meet Your Nail Artist</span>
-
-                <h2 class="font-display text-4xl sm:text-5xl font-semibold text-white mt-4 mb-6">
-                    Detail-led artistry, made personal<span class="text-[#C9A96E]">.</span>
-                </h2>
-
-                <p class="text-[#B7B0A8] leading-relaxed mb-5">
-                    Your appointment should feel like more than simply getting your nails done. It should be time set aside for yourself, with careful attention to the details that make the final result feel distinctly yours.
-                </p>
-
-                <p class="text-[#B7B0A8] leading-relaxed mb-8">
-                    From clean minimalist sets to detailed bridal designs, every appointment begins with understanding the look you want and ends with a finish built to make you feel confident.
-                </p>
-
-                <div class="grid grid-cols-2 gap-6 border-t border-white/10 pt-7">
-                    <div>
-                        <p class="font-display text-3xl text-[#C9A96E]">4+</p>
-                        <p class="text-xs text-white/50 mt-1 uppercase tracking-wider">Years Experience</p>
-                    </div>
-
-                    <div>
-                        <p class="font-display text-3xl text-[#C9A96E]">1:1</p>
-                        <p class="text-xs text-white/50 mt-1 uppercase tracking-wider">Appointment Care</p>
-                    </div>
-                </div>
-
-            </div>
-
-        </div>
-    </section>
-
-
-    <!-- =========================================================
-         REVIEWS
-    ========================================================== -->
-
-    <section
-        id="reviews"
-        class="py-24 md:py-32 px-5 sm:px-6 lg:px-12 bg-[#0A0A0A]"
-    >
-        <div class="max-w-6xl mx-auto">
-
-            <div
-                class="text-center mb-16"
-                data-aos="fade-up"
-                data-aos-duration="700"
-            >
-                <span class="eyebrow">Client Love</span>
-
-                <h2 class="font-display text-3xl sm:text-4xl md:text-5xl font-semibold text-white mt-3">
-                    Client Moments
-                </h2>
-
-                <div class="section-rule"></div>
-            </div>
-
-
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8">
-
-                <article
-                    class="review-card rounded-2xl p-7"
-                    data-aos="fade-up"
-                    data-aos-duration="600"
-                >
-                    <div class="text-[#C9A96E] text-sm tracking-widest mb-5">
-                        ★★★★★
-                    </div>
-
-                    <p class="text-white text-sm leading-relaxed mb-6 italic">
-                        "The most relaxing nail experience I've ever had. Every detail felt intentional."
-                    </p>
-
-                    <div>
-                        <p class="font-semibold text-white text-sm">Temilade O.</p>
-                        <p class="text-xs text-[#B7B0A8] mt-1">Verified client</p>
-                    </div>
-                </article>
-
-
-                <article
-                    class="review-card rounded-2xl p-7"
-                    data-aos="fade-up"
-                    data-aos-duration="600"
-                    data-aos-delay="150"
-                >
-                    <div class="text-[#C9A96E] text-sm tracking-widest mb-5">
-                        ★★★★★
-                    </div>
-
-                    <p class="text-white text-sm leading-relaxed mb-6 italic">
-                        "My bridal nails were absolutely stunning. She understood exactly what I wanted."
-                    </p>
-
-                    <div>
-                        <p class="font-semibold text-white text-sm">Adanna C.</p>
-                        <p class="text-xs text-[#B7B0A8] mt-1">Bridal client</p>
-                    </div>
-                </article>
-
-
-                <article
-                    class="review-card rounded-2xl p-7"
-                    data-aos="fade-up"
-                    data-aos-duration="600"
-                    data-aos-delay="300"
-                >
-                    <div class="text-[#C9A96E] text-sm tracking-widest mb-5">
-                        ★★★★★
-                    </div>
-
-                    <p class="text-white text-sm leading-relaxed mb-6 italic">
-                        "Booking was seamless, the studio was beautiful, and my nails have never looked this good."
-                    </p>
-
-                    <div>
-                        <p class="font-semibold text-white text-sm">Ifeoma N.</p>
-                        <p class="text-xs text-[#B7B0A8] mt-1">Verified client</p>
-                    </div>
-                </article>
-
-            </div>
-
-            <p class="text-center text-xs text-white/35 mt-8">
-                Replace these sample testimonials with genuine client reviews before launch.
-            </p>
-
-        </div>
-    </section>
-
-
-    <!-- =========================================================
-         TRUST
-    ========================================================== -->
-
-    <section
-        id="trust"
-        class="py-20 md:py-24 px-5 sm:px-6 lg:px-12 bg-[#111111] border-y border-white/5"
-    >
-        <div class="max-w-6xl mx-auto">
-
-            <div class="grid grid-cols-2 md:grid-cols-4 gap-8 md:gap-10 text-center">
-
-                <div data-aos="fade-up">
-                    <span class="font-display text-4xl md:text-5xl text-[#C9A96E]">
-                        500+
-                    </span>
-                    <p class="text-[#B7B0A8] mt-2 text-xs md:text-sm uppercase tracking-wider">
-                        Clients Served
-                    </p>
-                </div>
-
-                <div data-aos="fade-up" data-aos-delay="100">
-                    <span class="font-display text-4xl md:text-5xl text-[#C9A96E]">
-                        4+
-                    </span>
-                    <p class="text-[#B7B0A8] mt-2 text-xs md:text-sm uppercase tracking-wider">
-                        Years Experience
-                    </p>
-                </div>
-
-                <div data-aos="fade-up" data-aos-delay="200">
-                    <span class="font-display text-4xl md:text-5xl text-[#C9A96E]">
-                        1:1
-                    </span>
-                    <p class="text-[#B7B0A8] mt-2 text-xs md:text-sm uppercase tracking-wider">
-                        Personal Care
-                    </p>
-                </div>
-
-                <div data-aos="fade-up" data-aos-delay="300">
-                    <span class="font-display text-4xl md:text-5xl text-[#C9A96E]">
-                        Tue–Sat
-                    </span>
-                    <p class="text-[#B7B0A8] mt-2 text-xs md:text-sm uppercase tracking-wider">
-                        By Appointment
-                    </p>
-                </div>
-
-            </div>
-
-        </div>
-    </section>
-
-
-    <!-- =========================================================
-         LOCATION
-    ========================================================== -->
-
-    <section
-        id="location"
-        class="py-24 md:py-28 px-5 sm:px-6 lg:px-12 bg-[#0A0A0A]"
-    >
-        <div class="max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-10 items-stretch">
-
-            <div
-                class="bg-[#111111] border border-white/10 rounded-2xl p-8 md:p-10"
-                data-aos="fade-right"
-            >
-                <span class="eyebrow">Visit The Studio</span>
-
-                <h2 class="font-display text-3xl sm:text-4xl font-semibold mt-4 mb-6">
-                    Your appointment starts here<span class="text-[#C9A96E]">.</span>
-                </h2>
-
-                <div class="space-y-6 text-sm">
-
-                    <div>
-                        <p class="text-white font-medium mb-1">Location</p>
-                        <p class="text-[#B7B0A8]">
-                            A Shop In<br>
-                            Lagos, Nigeria
-                        </p>
-                    </div>
-
-                    <div>
-                        <p class="text-white font-medium mb-1">Opening Hours</p>
-                        <p class="text-[#B7B0A8]">
-                            Tuesday – Saturday<br>
-                            9:00 AM – 6:00 PM
-                        </p>
-                    </div>
-
-                    <div>
-                        <p class="text-white font-medium mb-1">Appointments</p>
-                        <p class="text-[#B7B0A8]">
-                            By appointment only. Please book ahead to secure your preferred time.
-                        </p>
-                    </div>
-
-                </div>
-
-                <a
-                    href="#book"
-                    class="inline-block mt-8 px-7 py-3.5 bg-[#C9A96E] text-black rounded-full font-semibold text-sm hover:bg-[#D4B896] transition-all"
-                >
-                    Book Your Visit
-                </a>
-
-            </div>
-
-
-            <div
-                class="min-h-[350px] bg-[#171717] rounded-2xl border border-white/10 flex items-center justify-center text-center p-8"
-                data-aos="fade-left"
-            >
-                <div>
-                    <div class="w-14 h-14 mx-auto rounded-full border border-[#C9A96E]/40 flex items-center justify-center mb-5">
-                        <span class="text-[#C9A96E] text-xl">⌖</span>
-                    </div>
-
-                    <h3 class="font-display text-2xl text-white mb-3">
-                        Lagos Studio
-                    </h3>
-
-                    <p class="text-sm text-[#B7B0A8] max-w-sm mx-auto leading-relaxed">
-                        Replace this panel with a Google Maps embed once the studio's exact location is confirmed.
-                    </p>
-                </div>
-            </div>
-
-        </div>
-    </section>
-
-
-    <!-- =========================================================
-         BOOKING
-    ========================================================== -->
-
-    <section
-        id="book"
-        class="py-24 md:py-32 px-5 sm:px-6 lg:px-12 bg-[#111111]"
-    >
-        <div class="max-w-4xl mx-auto">
-
-            <div
-                class="text-center mb-14"
-                data-aos="fade-up"
-                data-aos-duration="700"
-            >
-                <span class="eyebrow">Reserve Your Spot</span>
-
-                <h2 class="font-display text-3xl sm:text-4xl md:text-5xl font-semibold text-white mt-3">
-                    Reserve Your Appointment
-                </h2>
-
-                <p class="text-[#B7B0A8] mt-4 max-w-lg mx-auto leading-relaxed">
-                    Tell us what you'd like and your preferred date. Your request will open in WhatsApp for confirmation.
-                </p>
-            </div>
-
-
-            <div
-                class="bg-[#1A1A1A] rounded-2xl md:rounded-3xl p-6 sm:p-8 md:p-12 border border-white/10"
-                data-aos="fade-up"
-                data-aos-duration="800"
-            >
-
-                <div class="booking-notice rounded-xl p-4 mb-8">
-                    <p class="text-xs sm:text-sm text-[#D8C29A] leading-relaxed">
-                        <strong>How booking works:</strong>
-                        Complete the form below, then continue to WhatsApp. Your appointment is only confirmed once the studio responds.
-                    </p>
-                </div>
-
-
-                <form
-                    id="booking-form"
-                    class="grid grid-cols-1 md:grid-cols-2 gap-6"
-                    novalidate
-                >
-
-                    <!-- NAME -->
-
-                    <div>
-                        <label
-                            for="full-name"
-                            class="block text-sm font-medium text-white mb-2"
-                        >
-                            Full Name
-                        </label>
-
-                        <input
-                            id="full-name"
-                            name="fullName"
-                            type="text"
-                            placeholder="Your full name"
-                            autocomplete="name"
-                            required
-                            class="w-full px-5 py-3.5 rounded-xl border border-[#333] bg-[#0A0A0A] text-white placeholder-[#777] text-sm"
-                        >
-                    </div>
-
-
-                    <!-- PHONE -->
-
-                    <div>
-                        <label
-                            for="phone"
-                            class="block text-sm font-medium text-white mb-2"
-                        >
-                            Phone Number
-                        </label>
-
-                        <input
-                            id="phone"
-                            name="phone"
-                            type="tel"
-                            placeholder="+234 800 000 0000"
-                            autocomplete="tel"
-                            required
-                            class="w-full px-5 py-3.5 rounded-xl border border-[#333] bg-[#0A0A0A] text-white placeholder-[#777] text-sm"
-                        >
-                    </div>
-
-
-                    <!-- SERVICE -->
-
-                    <div>
-                        <label
-                            for="service"
-                            class="block text-sm font-medium text-white mb-2"
-                        >
-                            Preferred Service
-                        </label>
-
-                        <select
-                            id="service"
-                            name="service"
-                            required
-                            class="w-full px-5 py-3.5 rounded-xl border border-[#333] bg-[#0A0A0A] text-white text-sm cursor-pointer"
-                        >
-                            <option value="">Select a service</option>
-                            <option value="Gel Manicure">Gel Manicure</option>
-                            <option value="Luxury Pedicure">Luxury Pedicure</option>
-                            <option value="Acrylic Sets">Acrylic Sets</option>
-                            <option value="Custom Nail Art">Custom Nail Art</option>
-                            <option value="Bridal Nail Styling">Bridal Nail Styling</option>
-                            <option value="Express Session">Express Session</option>
-                        </select>
-                    </div>
-
-
-                    <!-- DATE -->
-
-                    <div>
-                        <label
-                            for="date"
-                            class="block text-sm font-medium text-white mb-2"
-                        >
-                            Preferred Date
-                        </label>
-
-                        <input
-                            id="date"
-                            name="date"
-                            type="date"
-                            required
-                            class="w-full px-5 py-3.5 rounded-xl border border-[#333] bg-[#0A0A0A] text-white text-sm cursor-pointer"
-                        >
-                    </div>
-
-
-                    <!-- TIME -->
-
-                    <div>
-                        <label
-                            for="time"
-                            class="block text-sm font-medium text-white mb-2"
-                        >
-                            Preferred Time
-                        </label>
-
-                        <select
-                            id="time"
-                            name="time"
-                            required
-                            class="w-full px-5 py-3.5 rounded-xl border border-[#333] bg-[#0A0A0A] text-white text-sm cursor-pointer"
-                        >
-                            <option value="">Select a time</option>
-                            <option value="9:00 AM">9:00 AM</option>
-                            <option value="10:00 AM">10:00 AM</option>
-                            <option value="11:00 AM">11:00 AM</option>
-                            <option value="12:00 PM">12:00 PM</option>
-                            <option value="1:00 PM">1:00 PM</option>
-                            <option value="2:00 PM">2:00 PM</option>
-                            <option value="3:00 PM">3:00 PM</option>
-                            <option value="4:00 PM">4:00 PM</option>
-                            <option value="5:00 PM">5:00 PM</option>
-                        </select>
-                    </div>
-
-
-                    <!-- MESSAGE -->
-
-                    <div>
-                        <label
-                            for="message"
-                            class="block text-sm font-medium text-white mb-2"
-                        >
-                            Additional Details
-                            <span class="text-white/40 font-normal">(Optional)</span>
-                        </label>
-
-                        <input
-                            id="message"
-                            name="message"
-                            type="text"
-                            placeholder="Design ideas, nail length, removal needed..."
-                            class="w-full px-5 py-3.5 rounded-xl border border-[#333] bg-[#0A0A0A] text-white placeholder-[#777] text-sm"
-                        >
-                    </div>
-
-
-                    <!-- ACTIONS -->
-
-                    <div class="md:col-span-2 flex flex-col sm:flex-row gap-4 pt-4">
-
-                        <button
-                            type="submit"
-                            id="booking-submit"
-                            class="flex-1 px-7 py-4 bg-[#C9A96E] text-black rounded-full font-semibold text-base hover:bg-[#D4B896] transition-all duration-300"
-                        >
-                            Continue to WhatsApp
-                        </button>
-
-                        <a
-                            href="https://wa.me/234REPLACE_NUMBER"
-                            id="direct-whatsapp"
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            class="flex-1 px-7 py-4 border border-[#25D366] text-[#25D366] rounded-full font-semibold text-base hover:bg-[#25D366] hover:text-black transition-all duration-300 text-center flex items-center justify-center gap-2"
-                        >
-                            Chat Directly
-                        </a>
-
-                    </div>
-
-                </form>
-
-
-                <!-- BOOKING NOTES -->
-
-                <div class="flex flex-wrap justify-center gap-x-6 gap-y-3 mt-8 text-xs text-[#B7B0A8] font-medium">
-                    <span>✓ Confirmation required</span>
-                    <span>✓ Flexible scheduling</span>
-                    <span>✓ By appointment only</span>
-                </div>
-
-            </div>
-
-
-            <!-- POLICIES -->
-
-            <div class="grid grid-cols-1 sm:grid-cols-3 gap-5 mt-8 text-center">
-
-                <div>
-                    <p class="text-white text-sm font-medium mb-1">
-                        Arrive on time
-                    </p>
-                    <p class="text-xs text-[#B7B0A8] leading-relaxed">
-                        Please arrive a few minutes before your appointment.
-                    </p>
-                </div>
-
-                <div>
-                    <p class="text-white text-sm font-medium mb-1">
-                        Need to reschedule?
-                    </p>
-                    <p class="text-xs text-[#B7B0A8] leading-relaxed">
-                        Contact the studio as early as possible.
-                    </p>
-                </div>
-
-                <div>
-                    <p class="text-white text-sm font-medium mb-1">
-                        First visit?
-                    </p>
-                    <p class="text-xs text-[#B7B0A8] leading-relaxed">
-                        Mention any previous nail work when booking.
-                    </p>
-                </div>
-
-            </div>
-
-        </div>
-    </section>
-
-
-    <!-- =========================================================
-         FOOTER
-    ========================================================== -->
-
-    <footer class="bg-[#0A0A0A] border-t border-white/10 pt-16 pb-8 px-5 sm:px-6 lg:px-12">
-
-        <div class="max-w-7xl mx-auto">
-
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-12 md:gap-8">
-
-                <!-- BRAND -->
-
-                <div class="text-center md:text-left">
-
-                    <h3 class="font-display text-2xl font-semibold text-white mb-2">
-                        X's Nails Tech
-                    </h3>
-
-                    <p class="text-[#B7B0A8] text-sm leading-relaxed max-w-xs mx-auto md:mx-0">
-                        Premium nail artistry in Lagos, created with care, precision, and intention.
-                    </p>
-
-
-                    <!-- SOCIAL LINKS -->
-
-                    <div class="flex justify-center md:justify-start gap-3 mt-6">
-
-                        <!-- Replace href values with real profiles -->
-
-                        <a
-                            href="REPLACE_INSTAGRAM_URL"
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            class="w-10 h-10 rounded-full bg-white/5 border border-white/5 flex items-center justify-center hover:bg-[#E4405F]/20 transition-colors"
-                            aria-label="Instagram"
-                        >
-                            <span class="text-[#E4405F] text-sm font-bold">IG</span>
-                        </a>
-
-                        <a
-                            href="REPLACE_TIKTOK_URL"
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            class="w-10 h-10 rounded-full bg-white/5 border border-white/5 flex items-center justify-center hover:bg-white/10 transition-colors"
-                            aria-label="TikTok"
-                        >
-                            <span class="text-white text-sm font-bold">TK</span>
-                        </a>
-
-                        <a
-                            href="https://wa.me/234REPLACE_NUMBER"
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            class="w-10 h-10 rounded-full bg-white/5 border border-white/5 flex items-center justify-center hover:bg-[#25D366]/20 transition-colors"
-                            aria-label="WhatsApp"
-                        >
-                            <span class="text-[#25D366] text-sm font-bold">WA</span>
-                        </a>
-
-                    </div>
-
-                </div>
-
-
-                <!-- LINKS -->
-
-                <div class="text-center">
-
-                    <p class="text-white font-medium text-sm mb-5">
-                        Explore
-                    </p>
-
-                    <div class="grid grid-cols-2 gap-x-6 gap-y-4 text-sm">
-
-                        <a
-                            href="#services"
-                            class="text-[#B7B0A8] hover:text-white transition-colors"
-                        >
-                            Services
-                        </a>
-
-                        <a
-                            href="#portfolio"
-                            class="text-[#B7B0A8] hover:text-white transition-colors"
-                        >
-                            Portfolio
-                        </a>
-
-                        <a
-                            href="#about"
-                            class="text-[#B7B0A8] hover:text-white transition-colors"
-                        >
-                            About
-                        </a>
-
-                        <a
-                            href="#reviews"
-                            class="text-[#B7B0A8] hover:text-white transition-colors"
-                        >
-                            Reviews
-                        </a>
-
-                        <a
-                            href="#location"
-                            class="text-[#B7B0A8] hover:text-white transition-colors"
-                        >
-                            Location
-                        </a>
-
-                        <a
-                            href="#book"
-                            class="text-[#B7B0A8] hover:text-white transition-colors"
-                        >
-                            Book
-                        </a>
-
-                    </div>
-
-                </div>
-
-
-                <!-- CONTACT -->
-
-                <div class="text-center md:text-right">
-
-                    <p class="text-white font-medium text-sm mb-4">
-                        Visit & Book
-                    </p>
-
-                    <p class="text-[#B7B0A8] text-sm leading-relaxed mb-4">
-                        REPLACE_WITH_STUDIO_ADDRESS<br>
-                        Lagos, Nigeria
-                    </p>
-
-                    <p class="text-[#B7B0A8] text-sm mb-5">
-                        Tue–Sat • 9:00 AM–6:00 PM
-                    </p>
-
-                    <a
-                        href="https://wa.me/234REPLACE_NUMBER"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        class="inline-block px-6 py-3 bg-[#C9A96E] text-black rounded-full font-semibold text-sm hover:bg-[#D4B896] transition-all"
-                    >
-                        Book via WhatsApp
-                    </a>
-
-                </div>
-
-            </div>
-
-
-            <!-- COPYRIGHT -->
-
-            <div class="mt-12 pt-6 border-t border-white/10 text-center text-[#B7B0A8] text-xs tracking-wider">
-                &copy;
-                <span id="current-year"></span>
-                X's Nails Tech.
-                All rights reserved.
-                <span class="hidden sm:inline">•</span>
-                Luxury Nail Studio • Lagos.
-            </div>
-
-        </div>
-
-    </footer>
-
-
-    <!-- =========================================================
-         LIGHTBOX
-    ========================================================== -->
-
-    <div
-        id="lightbox"
-        class="lightbox"
-        role="dialog"
-        aria-modal="true"
-        aria-label="Portfolio image preview"
-        aria-hidden="true"
-    >
-
-        <button
-            id="lightbox-close"
-            type="button"
-            class="lightbox-close"
-            aria-label="Close image preview"
-        >
-            ×
-        </button>
-
-        <div class="text-center">
-            <img
-                id="lightbox-image"
-                src=""
-                alt=""
-            >
-
-            <p
-                id="lightbox-title"
-                class="text-white text-sm mt-4 tracking-wide"
-            ></p>
-        </div>
-
-    </div>
-
-
-    <!-- =========================================================
-         AOS
-    ========================================================== -->
-
-    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-
-    <script>
-
-        /* =====================================================
-           INITIALIZE AOS
-        ====================================================== */
-
-        AOS.init({
-            duration: 700,
-            easing: 'ease-out-cubic',
-            once: true,
-            offset: 60
-        });
-
-
-        /* =====================================================
-           YEAR
-        ====================================================== */
-
-        document.getElementById('current-year').textContent =
-            new Date().getFullYear();
-
-
-        /* =====================================================
-           NAVBAR SCROLL
-        ====================================================== */
-
-        const navbar = document.getElementById('navbar');
-
-        function updateNavbar() {
-            if (window.scrollY > 50) {
-                navbar.classList.add('navbar-scrolled');
-            } else {
-                navbar.classList.remove('navbar-scrolled');
-            }
-        }
-
-        updateNavbar();
-
-        window.addEventListener(
-            'scroll',
-            updateNavbar,
-            { passive: true }
-        );
-
-
-        /* =====================================================
-           MOBILE NAVIGATION
-        ====================================================== */
-
-        const hamburger = document.getElementById('hamburger-btn');
-        const mobileNav = document.getElementById('mobile-nav');
-
-        const bar1 = document.getElementById('bar1');
-        const bar2 = document.getElementById('bar2');
-        const bar3 = document.getElementById('bar3');
-
-        let menuOpen = false;
-
-
-        function openMobileMenu() {
-
-            menuOpen = true;
-
-            mobileNav.classList.add('open');
-            mobileNav.setAttribute('aria-hidden', 'false');
-
-            hamburger.setAttribute('aria-expanded', 'true');
-            hamburger.setAttribute('aria-label', 'Close navigation menu');
-
-            bar1.style.transform =
-                'translateY(8.75px) rotate(45deg)';
-
-            bar2.style.opacity = '0';
-
-            bar3.style.transform =
-                'translateY(-8.75px) rotate(-45deg)';
-
-            document.body.classList.add('menu-open');
-        }
-
-
-        function closeMobileMenu() {
-
-            menuOpen = false;
-
-            mobileNav.classList.remove('open');
-            mobileNav.setAttribute('aria-hidden', 'true');
-
-            hamburger.setAttribute('aria-expanded', 'false');
-            hamburger.setAttribute('aria-label', 'Open navigation menu');
-
-            bar1.style.transform = '';
-            bar2.style.opacity = '1';
-            bar3.style.transform = '';
-
-            document.body.classList.remove('menu-open');
-        }
-
-
-        hamburger.addEventListener('click', () => {
-
-            if (menuOpen) {
-                closeMobileMenu();
-            } else {
-                openMobileMenu();
-            }
-
-        });
-
-
-        document
-            .querySelectorAll('.mobile-nav-link')
-            .forEach(link => {
-
-                link.addEventListener('click', () => {
-                    closeMobileMenu();
-                });
-
-            });
-
-
-        /* =====================================================
-           PARALLAX
-        ====================================================== */
-
-        const parallax =
-            document.getElementById('experience');
-
-        let ticking = false;
-
-
-        function updateParallax() {
-
-            if (!parallax) {
-                ticking = false;
-                return;
-            }
-
-            const rect =
-                parallax.getBoundingClientRect();
-
-            if (
-                rect.bottom < 0 ||
-                rect.top > window.innerHeight
-            ) {
-                ticking = false;
-                return;
-            }
-
-            const intensity =
-                window.innerWidth < 768
-                    ? 0.06
-                    : 0.18;
-
-            parallax.style.backgroundPositionY =
-                `calc(30% + ${rect.top * intensity}px)`;
-
-            ticking = false;
-        }
-
-
-        window.addEventListener(
-            'scroll',
-            () => {
-
-                if (!ticking) {
-
-                    ticking = true;
-
-                    requestAnimationFrame(
-                        updateParallax
-                    );
-
-                }
-
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>X's Nails Tech — Luxury Nail Studio • Lagos</title>
+  <meta name="description" content="Luxury nail artistry in Lagos. Premium manicures, pedicures, acrylic sets, custom nail art and bridal nail styling. Book your appointment today." />
+  <meta name="theme-color" content="#0A0A0A" />
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400;1,500&family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&display=swap" rel="stylesheet" />
+
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            champagne: '#C9A96E',
+            'champagne-dark': '#B8924E',
+            'soft-nude': '#E8D5C4',
+            'deep-black': '#000000',
+            'soft-black': '#0A0A0A',
+            'card-black': '#111111',
+            'warm-gray': '#B7B0A8'
+          },
+          fontFamily: {
+            display: ['"Playfair Display"', '"Cormorant Garamond"', 'Georgia', 'serif'],
+            body: ['"Inter"', 'system-ui', 'sans-serif']
+          },
+          animation: {
+            'float-slow': 'floatSlow 6s ease-in-out infinite',
+            'fade-in-up': 'fadeInUp 0.8s ease-out forwards'
+          },
+          keyframes: {
+            floatSlow: {
+              '0%, 100%': { transform: 'translateY(0)' },
+              '50%': { transform: 'translateY(-8px)' }
             },
-            { passive: true }
-        );
-
-
-        /* =====================================================
-           PORTFOLIO FILTER
-        ====================================================== */
-
-        const filterButtons =
-            document.querySelectorAll('.portfolio-filter');
-
-        const portfolioItems =
-            document.querySelectorAll('.portfolio-item');
-
-
-        filterButtons.forEach(button => {
-
-            button.addEventListener('click', () => {
-
-                const filter =
-                    button.dataset.filter;
-
-
-                filterButtons.forEach(btn => {
-
-                    btn.classList.remove('active');
-
-                });
-
-
-                button.classList.add('active');
-
-
-                portfolioItems.forEach(item => {
-
-                    const category =
-                        item.dataset.category;
-
-
-                    if (
-                        filter === 'all' ||
-                        category === filter
-                    ) {
-
-                        item.style.display = '';
-
-                    } else {
-
-                        item.style.display = 'none';
-
-                    }
-
-                });
-
-            });
-
-        });
-
-
-        /* =====================================================
-           PORTFOLIO LIGHTBOX
-        ====================================================== */
-
-        const lightbox =
-            document.getElementById('lightbox');
-
-        const lightboxImage =
-            document.getElementById('lightbox-image');
-
-        const lightboxTitle =
-            document.getElementById('lightbox-title');
-
-        const lightboxClose =
-            document.getElementById('lightbox-close');
-
-
-        function openLightbox(item) {
-
-            const image =
-                item.dataset.image;
-
-            const title =
-                item.dataset.title || 'Nail Design';
-
-
-            lightboxImage.src = image;
-            lightboxImage.alt = title;
-            lightboxTitle.textContent = title;
-
-            lightbox.classList.add('open');
-            lightbox.setAttribute('aria-hidden', 'false');
-
-            document.body.classList.add('menu-open');
-
-            lightboxClose.focus();
+            fadeInUp: {
+              '0%': { opacity: '0', transform: 'translateY(24px)' },
+              '100%': { opacity: '1', transform: 'translateY(0)' }
+            }
+          }
         }
+      }
+    }
+  </script>
 
+  <!-- AOS -->
+  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" />
 
-        function closeLightbox() {
+  <style>
+    /* ----- reset & base ----- */
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; -webkit-font-smoothing: antialiased; }
+    body {
+      font-family: 'Inter', system-ui, sans-serif;
+      background: #0A0A0A;
+      color: #F5F5F0;
+      overflow-x: hidden;
+    }
+    body.menu-open { overflow: hidden; }
+    ::selection { background: #C9A96E; color: #0A0A0A; }
 
-            lightbox.classList.remove('open');
-            lightbox.setAttribute('aria-hidden', 'true');
+    /* ----- spacing scale (rhythm) ----- */
+    :root {
+      --space-xs: 0.5rem;
+      --space-sm: 1rem;
+      --space-md: 2rem;
+      --space-lg: 4rem;
+      --space-xl: 6rem;
+      --space-2xl: 8rem;
+    }
 
-            lightboxImage.src = '';
-            lightboxTitle.textContent = '';
+    /* ----- navbar ----- */
+    #navbar {
+      transition: background-color 0.4s ease, backdrop-filter 0.4s ease, box-shadow 0.4s ease, border-color 0.4s ease;
+      background-color: transparent;
+    }
+    .navbar-scrolled {
+      background-color: rgba(10, 10, 10, 0.92) !important;
+      backdrop-filter: blur(18px) !important;
+      -webkit-backdrop-filter: blur(18px) !important;
+      box-shadow: 0 1px 24px rgba(0, 0, 0, 0.4) !important;
+      border-bottom: 1px solid rgba(201, 169, 110, 0.18) !important;
+    }
 
-            document.body.classList.remove('menu-open');
-        }
+    /* ----- hero ----- */
+    .hero-image-wrapper {
+      position: relative;
+      overflow: hidden;
+      border-radius: 1.5rem;
+    }
+    .hero-image-wrapper::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, rgba(0,0,0,0.08), transparent 45%, rgba(0,0,0,0.22));
+      pointer-events: none;
+    }
+    .hero-image-wrapper img {
+      transition: transform 0.8s cubic-bezier(0.25, 0.1, 0.25, 1);
+    }
+    .hero-image-wrapper:hover img { transform: scale(1.025); }
+    .hero-meta {
+      background: rgba(10, 10, 10, 0.86);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border: 1px solid rgba(201, 169, 110, 0.3);
+    }
 
+    /* ----- parallax ----- */
+    .parallax-section {
+      background-size: cover;
+      background-position: center 30%;
+      background-repeat: no-repeat;
+      will-change: background-position;
+    }
+    .parallax-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(90deg, rgba(0,0,0,0.78), rgba(0,0,0,0.48), rgba(0,0,0,0.72));
+      z-index: 1;
+      pointer-events: none;
+    }
+    .parallax-content { position: relative; z-index: 2; }
 
+    /* ----- global elements ----- */
+    .eyebrow {
+      font-size: 0.72rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: #C9A96E;
+      font-weight: 600;
+    }
+    .section-rule {
+      width: 48px;
+      height: 1px;
+      background: #C9A96E;
+      margin: 1.25rem auto 0;
+    }
+
+    /* ----- service cards (refined) ----- */
+    .service-card {
+      position: relative;
+      background: #141414;
+      border: 1px solid #292929;
+      transition: transform 0.4s ease, border-color 0.4s ease, box-shadow 0.4s ease;
+    }
+    .service-card:hover {
+      transform: translateY(-5px);
+      border-color: rgba(201, 169, 110, 0.7);
+      box-shadow: 0 24px 48px rgba(0, 0, 0, 0.45);
+    }
+    .service-number {
+      font-family: 'Cormorant Garamond', serif;
+      color: rgba(201, 169, 110, 0.7);
+      font-size: 2rem;
+      line-height: 1;
+    }
+
+    /* ----- portfolio masonry (refined) ----- */
+    .masonry-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      grid-auto-rows: 190px;
+      gap: 14px;
+    }
+    .masonry-item {
+      position: relative;
+      overflow: hidden;
+      cursor: pointer;
+      border-radius: 0.85rem;
+      background: #151515;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    .masonry-item:nth-child(1) { grid-column: span 2; grid-row: span 2; }
+    .masonry-item:nth-child(4) { grid-column: span 2; grid-row: span 1; }
+    .masonry-item img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.7s cubic-bezier(0.25, 0.1, 0.25, 1);
+    }
+    .masonry-item:hover img { transform: scale(1.055); }
+    .masonry-item::after {
+      content: "View";
+      position: absolute;
+      inset: auto 14px 14px auto;
+      padding: 7px 12px;
+      font-size: 0.68rem;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: #fff;
+      background: rgba(10, 10, 10, 0.72);
+      backdrop-filter: blur(8px);
+      border: 1px solid rgba(255,255,255,0.15);
+      opacity: 0;
+      transform: translateY(5px);
+      transition: all 0.3s ease;
+    }
+    .masonry-item:hover::after { opacity: 1; transform: translateY(0); }
+    .masonry-item.hidden-item {
+      display: none !important;
+    }
+    .masonry-item.filter-transition {
+      transition: opacity 0.5s ease, transform 0.5s ease;
+    }
+    .portfolio-filter {
+      transition: all 0.25s ease;
+    }
+    .portfolio-filter.active,
+    .portfolio-filter:hover {
+      background: #C9A96E;
+      color: #0A0A0A;
+      border-color: #C9A96E;
+    }
+
+    /* ----- about image ----- */
+    .about-image {
+      overflow: hidden;
+      border-radius: 1.25rem;
+    }
+    .about-image img {
+      transition: transform 0.7s ease;
+    }
+    .about-image:hover img { transform: scale(1.025); }
+
+    /* ----- reviews (refined) ----- */
+    .review-card {
+      background: #171717;
+      border: 1px solid rgba(255,255,255,0.08);
+      transition: transform 0.3s ease, border-color 0.3s ease;
+    }
+    .review-card:hover {
+      transform: translateY(-4px);
+      border-color: rgba(201, 169, 110, 0.3);
+    }
+
+    /* ----- booking form ----- */
+    input, select, textarea {
+      transition: border-color 0.25s ease, box-shadow 0.25s ease;
+    }
+    input:focus, select:focus, textarea:focus {
+      outline: none;
+      border-color: #C9A96E !important;
+      box-shadow: 0 0 0 3px rgba(201, 169, 110, 0.14) !important;
+    }
+    input:user-invalid, select:user-invalid, textarea:user-invalid {
+      border-color: #b85c5c;
+    }
+    .booking-notice {
+      background: rgba(201, 169, 110, 0.07);
+      border: 1px solid rgba(201, 169, 110, 0.2);
+    }
+
+    /* ----- lightbox ----- */
+    .lightbox {
+      position: fixed;
+      inset: 0;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 1.5rem;
+      background: rgba(0, 0, 0, 0.94);
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity 0.3s ease, visibility 0.3s ease;
+    }
+    .lightbox.open { opacity: 1; visibility: visible; }
+    .lightbox img {
+      max-width: min(1100px, 92vw);
+      max-height: 84vh;
+      object-fit: contain;
+      border-radius: 0.75rem;
+      transform: scale(0.96);
+      transition: transform 0.35s ease;
+    }
+    .lightbox.open img { transform: scale(1); }
+    .lightbox-close {
+      position: absolute;
+      top: 1.25rem;
+      right: 1.25rem;
+      width: 44px;
+      height: 44px;
+      border: 1px solid rgba(255,255,255,0.2);
+      background: rgba(20,20,20,0.8);
+      border-radius: 50%;
+      color: white;
+      font-size: 1.5rem;
+      cursor: pointer;
+    }
+
+    /* ----- mobile nav (refined) ----- */
+    .mobile-nav {
+      transform: translateY(-110%);
+      transition: transform 0.5s cubic-bezier(0.23, 1, 0.32, 1), opacity 0.4s ease;
+      opacity: 0;
+      position: fixed;
+      inset: 0;
+      background: rgba(10, 10, 10, 0.98);
+      backdrop-filter: blur(24px);
+      -webkit-backdrop-filter: blur(24px);
+      z-index: 50;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 28px;
+    }
+    .mobile-nav.open {
+      transform: translateY(0);
+      opacity: 1;
+    }
+    .mobile-nav-link {
+      transition: opacity 0.3s ease, transform 0.3s ease;
+    }
+    .mobile-nav-link:hover {
+      opacity: 0.7;
+      transform: scale(1.02);
+    }
+
+    /* ----- footer (redesigned) ----- */
+    .footer-brand {
+      font-size: 1.5rem;
+      letter-spacing: -0.02em;
+    }
+    .footer-cta {
+      background: rgba(201, 169, 110, 0.08);
+      border: 1px solid rgba(201, 169, 110, 0.2);
+      transition: background 0.3s ease, border-color 0.3s ease;
+    }
+    .footer-cta:hover {
+      background: rgba(201, 169, 110, 0.15);
+      border-color: rgba(201, 169, 110, 0.5);
+    }
+
+    /* ----- reduced motion ----- */
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      * { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
+    }
+
+    /* ----- responsive refinements ----- */
+    @media (max-width: 1024px) {
+      .masonry-grid { grid-template-columns: repeat(3, 1fr); grid-auto-rows: 170px; }
+      .masonry-item:nth-child(1) { grid-column: span 2; grid-row: span 2; }
+      .masonry-item:nth-child(4) { grid-column: span 2; }
+    }
+    @media (max-width: 640px) {
+      .masonry-grid { grid-template-columns: repeat(2, 1fr); grid-auto-rows: 140px; gap: 8px; }
+      .masonry-item:nth-child(1) { grid-column: span 2; grid-row: span 2; }
+      .masonry-item:nth-child(4) { grid-column: span 2; }
+      .masonry-item::after { display: none; }
+      .parallax-section { background-position: center; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ===== NAVBAR ===== -->
+  <nav id="navbar" class="fixed top-0 left-0 right-0 z-50 px-5 sm:px-6 lg:px-12 py-4 flex items-center justify-between border-b border-transparent" aria-label="Main navigation">
+    <a href="#home" class="font-display text-2xl md:text-3xl font-semibold tracking-wide text-white hover:text-[#C9A96E] transition-colors duration-300">X's Nails Tech</a>
+    <div class="hidden lg:flex items-center gap-8 text-sm font-medium tracking-wider uppercase text-white/80">
+      <a href="#home" class="hover:text-[#C9A96E] transition-colors">Home</a>
+      <a href="#services" class="hover:text-[#C9A96E] transition-colors">Services</a>
+      <a href="#portfolio" class="hover:text-[#C9A96E] transition-colors">Portfolio</a>
+      <a href="#reviews" class="hover:text-[#C9A96E] transition-colors">Reviews</a>
+      <a href="#book" class="px-5 py-2.5 bg-[#C9A96E] text-black font-semibold rounded-full hover:bg-[#D4B896] transition-all duration-300">Book Appointment</a>
+    </div>
+    <button id="hamburger-btn" type="button" class="lg:hidden z-[60] p-2" aria-label="Open navigation menu" aria-expanded="false" aria-controls="mobile-nav">
+      <svg width="26" height="20" viewBox="0 0 26 20" fill="none" aria-hidden="true">
+        <rect id="bar1" y="0" width="26" height="2.5" rx="1.25" fill="white"/>
+        <rect id="bar2" y="8.75" width="26" height="2.5" rx="1.25" fill="white"/>
+        <rect id="bar3" y="17.5" width="26" height="2.5" rx="1.25" fill="white"/>
+      </svg>
+    </button>
+  </nav>
+
+  <!-- ===== MOBILE NAV ===== -->
+  <div id="mobile-nav" class="mobile-nav lg:hidden" aria-hidden="true">
+    <a href="#home" class="text-2xl font-display font-medium text-white hover:text-[#C9A96E] mobile-nav-link">Home</a>
+    <a href="#services" class="text-2xl font-display font-medium text-white hover:text-[#C9A96E] mobile-nav-link">Services</a>
+    <a href="#portfolio" class="text-2xl font-display font-medium text-white hover:text-[#C9A96E] mobile-nav-link">Portfolio</a>
+    <a href="#about" class="text-2xl font-display font-medium text-white hover:text-[#C9A96E] mobile-nav-link">About</a>
+    <a href="#reviews" class="text-2xl font-display font-medium text-white hover:text-[#C9A96E] mobile-nav-link">Reviews</a>
+    <a href="#book" class="mt-4 px-8 py-3 bg-[#C9A96E] text-black rounded-full font-semibold text-lg mobile-nav-link">Book Appointment</a>
+  </div>
+
+  <!-- ===== HERO (refined spacing, ~90vh) ===== -->
+  <section id="home" class="relative min-h-[90vh] flex items-center pt-24 pb-12 px-5 sm:px-6 lg:px-12 overflow-hidden">
+    <div class="max-w-7xl mx-auto w-full grid grid-cols-1 lg:grid-cols-[1fr_1.05fr] gap-12 lg:gap-16 items-center">
+      <div class="order-2 lg:order-1" data-aos="fade-right" data-aos-duration="900">
+        <span class="eyebrow">Luxury Nail Studio • Lagos</span>
+        <h1 class="font-display text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-semibold leading-[1.05] text-white mt-4 mb-5">Nails Worth<br>Slowing Down For<span class="text-[#C9A96E]">.</span></h1>
+        <p class="text-base md:text-lg text-[#B7B0A8] leading-relaxed max-w-xl mb-7">Refined nail artistry, thoughtful care, and a beautifully considered appointment experience in Lagos.</p>
+        <div class="flex flex-wrap gap-4">
+          <a href="#book" class="px-7 py-3.5 bg-[#C9A96E] text-black rounded-full font-semibold text-sm md:text-base tracking-wide hover:bg-[#D4B896] transition-all duration-300">Book Appointment</a>
+          <a href="#portfolio" class="px-7 py-3.5 border border-[#C9A96E] text-[#C9A96E] rounded-full font-semibold text-sm md:text-base tracking-wide hover:bg-[#C9A96E] hover:text-black transition-all duration-300">View Work</a>
+        </div>
+        <div class="flex flex-wrap gap-x-6 gap-y-2 mt-8 text-xs text-white/55 uppercase tracking-wider">
+          <span>By Appointment</span><span>•</span><span>Lagos, Nigeria</span><span>•</span><span>Tue–Sat</span>
+        </div>
+      </div>
+      <div class="order-1 lg:order-2 relative" data-aos="fade-left" data-aos-duration="900">
+        <div class="relative w-full max-w-2xl ml-auto">
+          <div class="hero-image-wrapper shadow-2xl">
+            <img src="https://images.unsplash.com/photo-1604654894610-df63bc536371?w=1100&h=850&fit=crop&crop=center&auto=format&q=88" alt="Luxury nail art close-up" class="w-full h-[380px] sm:h-[460px] lg:h-[560px] object-cover" loading="eager" fetchpriority="high">
+          </div>
+          <div class="hero-meta absolute bottom-5 left-5 sm:left-auto sm:right-5 rounded-full px-4 sm:px-5 py-3 flex items-center gap-3">
+            <span class="text-[#C9A96E] text-sm tracking-widest">★★★★★</span>
+            <span class="text-xs font-medium text-white whitespace-nowrap">Premium Nail Artistry</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== EXPERIENCE (parallax) ===== -->
+  <section id="experience" class="parallax-section relative h-[65vh] md:h-[70vh] flex items-center justify-center text-center px-6" style="background-image: url('https://images.unsplash.com/photo-1560869713-7d0a29e28c2b?w=1600&h=900&fit=crop&auto=format&q=82');">
+    <div class="parallax-overlay"></div>
+    <div class="parallax-content max-w-3xl mx-auto" data-aos="fade-up" data-aos-duration="1000">
+      <span class="eyebrow">The Experience</span>
+      <h2 class="font-display text-4xl sm:text-5xl md:text-6xl font-semibold text-white mt-4 mb-5 leading-tight">Luxury Is In The Details<span class="text-[#C9A96E]">.</span></h2>
+      <p class="text-white/80 text-lg md:text-xl mb-8 leading-relaxed font-light max-w-2xl mx-auto">From the first consultation to the final detail, every appointment is designed around precision, comfort, and your personal style.</p>
+      <a href="#book" class="inline-block px-8 py-3.5 bg-[#C9A96E] text-black rounded-full font-semibold text-base hover:bg-[#D4B896] transition-all duration-300">Reserve Your Session</a>
+    </div>
+  </section>
+
+  <!-- ===== SERVICES (refined spacing) ===== -->
+  <section id="services" class="py-20 md:py-28 px-5 sm:px-6 lg:px-12 bg-[#0A0A0A]">
+    <div class="max-w-7xl mx-auto">
+      <div class="text-center mb-14" data-aos="fade-up" data-aos-duration="700">
+        <span class="eyebrow">What We Offer</span>
+        <h2 class="font-display text-3xl sm:text-4xl md:text-5xl font-semibold text-white mt-3">Signature Services</h2>
+        <div class="section-rule"></div>
+      </div>
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-px bg-[#292929] border border-[#292929]">
+        <article class="service-card p-7 md:p-8" data-aos="fade-up" data-aos-duration="600">
+          <span class="service-number">01</span>
+          <h3 class="font-display text-2xl font-semibold text-white mt-5 mb-3">Gel Manicure</h3>
+          <p class="text-[#B7B0A8] text-sm leading-relaxed mb-6">A polished, long-lasting finish with careful shaping, cuticle care, and a clean refined result.</p>
+          <div class="flex items-center justify-between border-t border-white/10 pt-4">
+            <span class="text-xs text-white/50">Approx. 60 min</span>
+            <span class="text-sm text-[#C9A96E]">From ₦18,000</span>
+          </div>
+        </article>
+        <article class="service-card p-7 md:p-8" data-aos="fade-up" data-aos-duration="600" data-aos-delay="100">
+          <span class="service-number">02</span>
+          <h3 class="font-display text-2xl font-semibold text-white mt-5 mb-3">Luxury Pedicure</h3>
+          <p class="text-[#B7B0A8] text-sm leading-relaxed mb-6">A relaxing foot-care ritual combining exfoliation, detailed grooming, massage, and a polished finish.</p>
+          <div class="flex items-center justify-between border-t border-white/10 pt-4">
+            <span class="text-xs text-white/50">Approx. 60 min</span>
+            <span class="text-sm text-[#C9A96E]">From ₦20,000</span>
+          </div>
+        </article>
+        <article class="service-card p-7 md:p-8" data-aos="fade-up" data-aos-duration="600" data-aos-delay="200">
+          <span class="service-number">03</span>
+          <h3 class="font-display text-2xl font-semibold text-white mt-5 mb-3">Acrylic Sets</h3>
+          <p class="text-[#B7B0A8] text-sm leading-relaxed mb-6">Sculpted extensions tailored to your preferred length, shape, and finish with a focus on clean structure.</p>
+          <div class="flex items-center justify-between border-t border-white/10 pt-4">
+            <span class="text-xs text-white/50">90–120 min</span>
+            <span class="text-sm text-[#C9A96E]">From ₦25,000</span>
+          </div>
+        </article>
+        <article class="service-card p-7 md:p-8" data-aos="fade-up" data-aos-duration="600" data-aos-delay="150">
+          <span class="service-number">04</span>
+          <h3 class="font-display text-2xl font-semibold text-white mt-5 mb-3">Custom Nail Art</h3>
+          <p class="text-[#B7B0A8] text-sm leading-relaxed mb-6">Bespoke designs ranging from understated details to expressive statement sets created around your style.</p>
+          <div class="flex items-center justify-between border-t border-white/10 pt-4">
+            <span class="text-xs text-white/50">Varies by design</span>
+            <span class="text-sm text-[#C9A96E]">From ₦5,000</span>
+          </div>
+        </article>
+        <article class="service-card p-7 md:p-8" data-aos="fade-up" data-aos-duration="600" data-aos-delay="250">
+          <span class="service-number">05</span>
+          <h3 class="font-display text-2xl font-semibold text-white mt-5 mb-3">Bridal Nail Styling</h3>
+          <p class="text-[#B7B0A8] text-sm leading-relaxed mb-6">A considered bridal nail experience including design consultation, trial options, and wedding-day styling.</p>
+          <div class="flex items-center justify-between border-t border-white/10 pt-4">
+            <span class="text-xs text-white/50">By consultation</span>
+            <span class="text-sm text-[#C9A96E]">Enquire</span>
+          </div>
+        </article>
+        <article class="service-card p-7 md:p-8" data-aos="fade-up" data-aos-duration="600" data-aos-delay="300">
+          <span class="service-number">06</span>
+          <h3 class="font-display text-2xl font-semibold text-white mt-5 mb-3">Express Session</h3>
+          <p class="text-[#B7B0A8] text-sm leading-relaxed mb-6">A streamlined appointment for clients who want beautiful, well-finished nails without the longer session.</p>
+          <div class="flex items-center justify-between border-t border-white/10 pt-4">
+            <span class="text-xs text-white/50">Approx. 45 min</span>
+            <span class="text-sm text-[#C9A96E]">From ₦12,000</span>
+          </div>
+        </article>
+      </div>
+      <p class="text-center text-xs text-white/40 mt-6">* Prices shown are starting prices and may vary depending on length, design, removal, and additional services.</p>
+    </div>
+  </section>
+
+  <!-- ===== PORTFOLIO (refined filter + transitions) ===== -->
+  <section id="portfolio" class="py-20 md:py-28 px-5 sm:px-6 lg:px-12 bg-[#0A0A0A]">
+    <div class="max-w-7xl mx-auto">
+      <div class="text-center mb-12" data-aos="fade-up" data-aos-duration="700">
+        <span class="eyebrow">The Portfolio</span>
+        <h2 class="font-display text-3xl sm:text-4xl md:text-5xl font-semibold text-white mt-3">Recent Work</h2>
+        <div class="section-rule"></div>
+        <p class="text-[#B7B0A8] max-w-xl mx-auto mt-5 text-sm md:text-base leading-relaxed">A selection of nail designs across minimal, bridal, editorial, and statement styles.</p>
+      </div>
+      <div class="flex flex-wrap justify-center gap-2 mb-10" data-aos="fade-up" data-aos-duration="600">
+        <button type="button" class="portfolio-filter active px-4 py-2 rounded-full border border-white/10 bg-[#1A1A1A] text-xs uppercase tracking-widest" data-filter="all">All</button>
+        <button type="button" class="portfolio-filter px-4 py-2 rounded-full border border-white/10 bg-[#1A1A1A] text-[#B7B0A8] text-xs uppercase tracking-widest" data-filter="minimal">Minimal</button>
+        <button type="button" class="portfolio-filter px-4 py-2 rounded-full border border-white/10 bg-[#1A1A1A] text-[#B7B0A8] text-xs uppercase tracking-widest" data-filter="bridal">Bridal</button>
+        <button type="button" class="portfolio-filter px-4 py-2 rounded-full border border-white/10 bg-[#1A1A1A] text-[#B7B0A8] text-xs uppercase tracking-widest" data-filter="editorial">Editorial</button>
+        <button type="button" class="portfolio-filter px-4 py-2 rounded-full border border-white/10 bg-[#1A1A1A] text-[#B7B0A8] text-xs uppercase tracking-widest" data-filter="luxury">Luxury</button>
+      </div>
+      <div class="masonry-grid" id="masonryGrid">
+        <button type="button" class="masonry-item portfolio-item" data-category="editorial" data-image="https://images.unsplash.com/photo-1607779097040-26e80aa78e66?w=1200&h=1000&fit=crop&auto=format&q=88" data-title="Editorial Set" data-aos="zoom-in" data-aos-duration="700">
+          <img src="https://images.unsplash.com/photo-1607779097040-26e80aa78e66?w=800&h=700&fit=crop&auto=format&q=85" alt="Editorial nail design" loading="lazy">
+        </button>
+        <button type="button" class="masonry-item portfolio-item" data-category="minimal" data-image="https://images.unsplash.com/photo-1632345031435-8727f6897d53?w=1000&h=800&fit=crop&auto=format&q=88" data-title="Minimal Set" data-aos="zoom-in" data-aos-duration="700" data-aos-delay="100">
+          <img src="https://images.unsplash.com/photo-1632345031435-8727f6897d53?w=600&h=500&fit=crop&auto=format&q=85" alt="Minimal nail design" loading="lazy">
+        </button>
+        <button type="button" class="masonry-item portfolio-item" data-category="bridal" data-image="https://images.unsplash.com/photo-1604654894610-df63bc536371?w=1000&h=800&fit=crop&auto=format&q=88" data-title="Bridal Set" data-aos="zoom-in" data-aos-duration="700" data-aos-delay="150">
+          <img src="https://images.unsplash.com/photo-1604654894610-df63bc536371?w=600&h=500&fit=crop&auto=format&q=85" alt="Bridal nail design" loading="lazy">
+        </button>
+        <button type="button" class="masonry-item portfolio-item" data-category="luxury" data-image="https://images.unsplash.com/photo-1560869713-7d0a29e28c2b?w=1200&h=700&fit=crop&auto=format&q=88" data-title="Luxury Set" data-aos="zoom-in" data-aos-duration="700" data-aos-delay="200">
+          <img src="https://images.unsplash.com/photo-1652990337162-fa84a588d843?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Luxury nail design" loading="lazy">
+        </button>
+        <button type="button" class="masonry-item portfolio-item" data-category="minimal" data-image="https://images.unsplash.com/photo-1610992015732-2449b76344bc?w=1000&h=800&fit=crop&auto=format&q=88" data-title="Clean Minimal Set" data-aos="zoom-in" data-aos-duration="700" data-aos-delay="250">
+          <img src="https://images.unsplash.com/photo-1610992015732-2449b76344bc?w=600&h=500&fit=crop&auto=format&q=85" alt="Clean minimal manicure" loading="lazy">
+        </button>
+        <button type="button" class="masonry-item portfolio-item" data-category="luxury" data-image="https://images.unsplash.com/photo-1519014816548-bf5fe059798b?w=1000&h=800&fit=crop&auto=format&q=88" data-title="Statement Set" data-aos="zoom-in" data-aos-duration="700" data-aos-delay="300">
+          <img src="https://images.unsplash.com/photo-1659391542239-9648f307c0b1?q=80&w=1172&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Statement nail design" loading="lazy">
+        </button>
+      </div>
+      <p class="text-center text-xs text-white/35 mt-8">Portfolio imagery should be replaced with the nail artist's actual client work before launch.</p>
+    </div>
+  </section>
+
+  <!-- ===== ABOUT (refined spacing) ===== -->
+  <section id="about" class="py-20 md:py-28 px-5 sm:px-6 lg:px-12 bg-[#111111]">
+    <div class="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center">
+      <div class="about-image" data-aos="fade-right" data-aos-duration="800">
+        <img src="https://images.unsplash.com/photo-1699726242756-54a80b68405a?q=80&w=764&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Nail artist in her studio" class="w-full h-[460px] md:h-[600px] object-cover" loading="lazy">
+      </div>
+      <div data-aos="fade-left" data-aos-duration="800">
+        <span class="eyebrow">Meet Your Nail Artist</span>
+        <h2 class="font-display text-4xl sm:text-5xl font-semibold text-white mt-4 mb-6">Detail-led artistry, made personal<span class="text-[#C9A96E]">.</span></h2>
+        <p class="text-[#B7B0A8] leading-relaxed mb-5">Your appointment should feel like more than simply getting your nails done. It should be time set aside for yourself, with careful attention to the details that make the final result feel distinctly yours.</p>
+        <p class="text-[#B7B0A8] leading-relaxed mb-8">From clean minimalist sets to detailed bridal designs, every appointment begins with understanding the look you want and ends with a finish built to make you feel confident.</p>
+        <div class="grid grid-cols-2 gap-6 border-t border-white/10 pt-7">
+          <div><p class="font-display text-3xl text-[#C9A96E]">2+</p><p class="text-xs text-white/50 mt-1 uppercase tracking-wider">Years Experience</p></div>
+          <div><p class="font-display text-3xl text-[#C9A96E]">1:1</p><p class="text-xs text-white/50 mt-1 uppercase tracking-wider">Appointment Care</p></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== REVIEWS (refined cards) ===== -->
+  <section id="reviews" class="py-20 md:py-28 px-5 sm:px-6 lg:px-12 bg-[#0A0A0A]">
+    <div class="max-w-6xl mx-auto">
+      <div class="text-center mb-14" data-aos="fade-up" data-aos-duration="700">
+        <span class="eyebrow">Client Love</span>
+        <h2 class="font-display text-3xl sm:text-4xl md:text-5xl font-semibold text-white mt-3">Client Moments</h2>
+        <div class="section-rule"></div>
+      </div>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8">
+        <article class="review-card rounded-2xl p-7" data-aos="fade-up" data-aos-duration="600">
+          <div class="text-[#C9A96E] text-sm tracking-widest mb-5">★★★★★</div>
+          <p class="text-white text-sm leading-relaxed mb-6 italic">"The most relaxing nail experience I've ever had. Every detail felt intentional."</p>
+          <div><p class="font-semibold text-white text-sm">Temilade O.</p><p class="text-xs text-[#B7B0A8] mt-1">Verified client</p></div>
+        </article>
+        <article class="review-card rounded-2xl p-7" data-aos="fade-up" data-aos-duration="600" data-aos-delay="150">
+          <div class="text-[#C9A96E] text-sm tracking-widest mb-5">★★★★★</div>
+          <p class="text-white text-sm leading-relaxed mb-6 italic">"My bridal nails were absolutely stunning. She understood exactly what I wanted."</p>
+          <div><p class="font-semibold text-white text-sm">Adanna C.</p><p class="text-xs text-[#B7B0A8] mt-1">Bridal client</p></div>
+        </article>
+        <article class="review-card rounded-2xl p-7" data-aos="fade-up" data-aos-duration="600" data-aos-delay="300">
+          <div class="text-[#C9A96E] text-sm tracking-widest mb-5">★★★★★</div>
+          <p class="text-white text-sm leading-relaxed mb-6 italic">"Booking was seamless, the studio was beautiful, and my nails have never looked this good."</p>
+          <div><p class="font-semibold text-white text-sm">Ifeoma N.</p><p class="text-xs text-[#B7B0A8] mt-1">Verified client</p></div>
+        </article>
+      </div>
+      <p class="text-center text-xs text-white/35 mt-8">Replace these sample testimonials with genuine client reviews before launch.</p>
+    </div>
+  </section>
+
+  <!-- ===== TRUST ===== -->
+  <section id="trust" class="py-16 md:py-20 px-5 sm:px-6 lg:px-12 bg-[#111111] border-y border-white/5">
+    <div class="max-w-6xl mx-auto">
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-8 md:gap-10 text-center">
+        <div data-aos="fade-up"><span class="font-display text-4xl md:text-5xl text-[#C9A96E]">500+</span><p class="text-[#B7B0A8] mt-2 text-xs md:text-sm uppercase tracking-wider">Clients Served</p></div>
+        <div data-aos="fade-up" data-aos-delay="100"><span class="font-display text-4xl md:text-5xl text-[#C9A96E]">2+</span><p class="text-[#B7B0A8] mt-2 text-xs md:text-sm uppercase tracking-wider">Years Experience</p></div>
+        <div data-aos="fade-up" data-aos-delay="200"><span class="font-display text-4xl md:text-5xl text-[#C9A96E]">1:1</span><p class="text-[#B7B0A8] mt-2 text-xs md:text-sm uppercase tracking-wider">Personal Care</p></div>
+        <div data-aos="fade-up" data-aos-delay="300"><span class="font-display text-4xl md:text-5xl text-[#C9A96E]">Tue–Sat</span><p class="text-[#B7B0A8] mt-2 text-xs md:text-sm uppercase tracking-wider">By Appointment</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== LOCATION ===== -->
+  <section id="location" class="py-20 md:py-24 px-5 sm:px-6 lg:px-12 bg-[#0A0A0A]">
+    <div class="max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-10 items-stretch">
+      <div class="bg-[#111111] border border-white/10 rounded-2xl p-8 md:p-10" data-aos="fade-right">
+        <span class="eyebrow">Visit The Studio</span>
+        <h2 class="font-display text-3xl sm:text-4xl font-semibold mt-4 mb-6">Your appointment starts here<span class="text-[#C9A96E]">.</span></h2>
+        <div class="space-y-6 text-sm">
+          <div><p class="text-white font-medium mb-1">Location</p><p class="text-[#B7B0A8]">Finder's Avenue, Victoria Island<br>Lagos, Nigeria</p></div>
+          <div><p class="text-white font-medium mb-1">Opening Hours</p><p class="text-[#B7B0A8]">Tuesday – Saturday<br>9:00 AM – 6:00 PM</p></div>
+          <div><p class="text-white font-medium mb-1">Appointments</p><p class="text-[#B7B0A8]">By appointment only. Please book ahead to secure your preferred time.</p></div>
+        </div>
+        <a href="#book" class="inline-block mt-8 px-7 py-3.5 bg-[#C9A96E] text-black rounded-full font-semibold text-sm hover:bg-[#D4B896] transition-all">Book Your Visit</a>
+      </div>
+      <div class="min-h-[320px] bg-[#171717] rounded-2xl border border-white/10 flex items-center justify-center text-center p-8" data-aos="fade-left">
+        <div>
+          <div class="w-14 h-14 mx-auto rounded-full border border-[#C9A96E]/40 flex items-center justify-center mb-5"><span class="text-[#C9A96E] text-xl">⌖</span></div>
+          <h3 class="font-display text-2xl text-white mb-3">Lagos Studio</h3>
+          <p class="text-sm text-[#B7B0A8] max-w-sm mx-auto leading-relaxed">Coming Soon</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== BOOKING (refined spacing & touch targets) ===== -->
+  <section id="book" class="py-20 md:py-28 px-5 sm:px-6 lg:px-12 bg-[#111111]">
+    <div class="max-w-4xl mx-auto">
+      <div class="text-center mb-14" data-aos="fade-up" data-aos-duration="700">
+        <span class="eyebrow">Reserve Your Spot</span>
+        <h2 class="font-display text-3xl sm:text-4xl md:text-5xl font-semibold text-white mt-3">Reserve Your Appointment</h2>
+        <p class="text-[#B7B0A8] mt-4 max-w-lg mx-auto leading-relaxed">Tell us what you'd like and your preferred date. Your request will open in WhatsApp for confirmation.</p>
+      </div>
+      <div class="bg-[#1A1A1A] rounded-2xl md:rounded-3xl p-6 sm:p-8 md:p-12 border border-white/10" data-aos="fade-up" data-aos-duration="800">
+        <div class="booking-notice rounded-xl p-4 mb-8"><p class="text-xs sm:text-sm text-[#D8C29A] leading-relaxed"><strong>How booking works:</strong> Complete the form below, then continue to WhatsApp. Your appointment is only confirmed once the studio responds.</p></div>
+        <form id="booking-form" class="grid grid-cols-1 md:grid-cols-2 gap-6" novalidate>
+          <div><label for="full-name" class="block text-sm font-medium text-white mb-2">Full Name</label><input id="full-name" name="fullName" type="text" placeholder="Your full name" autocomplete="name" required class="w-full px-5 py-3.5 rounded-xl border border-[#333] bg-[#0A0A0A] text-white placeholder-[#777] text-sm"></div>
+          <div><label for="phone" class="block text-sm font-medium text-white mb-2">Phone Number</label><input id="phone" name="phone" type="tel" placeholder="+234 800 000 0000" autocomplete="tel" required class="w-full px-5 py-3.5 rounded-xl border border-[#333] bg-[#0A0A0A] text-white placeholder-[#777] text-sm"></div>
+          <div><label for="service" class="block text-sm font-medium text-white mb-2">Preferred Service</label><select id="service" name="service" required class="w-full px-5 py-3.5 rounded-xl border border-[#333] bg-[#0A0A0A] text-white text-sm cursor-pointer"><option value="">Select a service</option><option value="Gel Manicure">Gel Manicure</option><option value="Luxury Pedicure">Luxury Pedicure</option><option value="Acrylic Sets">Acrylic Sets</option><option value="Custom Nail Art">Custom Nail Art</option><option value="Bridal Nail Styling">Bridal Nail Styling</option><option value="Express Session">Express Session</option></select></div>
+          <div><label for="date" class="block text-sm font-medium text-white mb-2">Preferred Date</label><input id="date" name="date" type="date" required class="w-full px-5 py-3.5 rounded-xl border border-[#333] bg-[#0A0A0A] text-white text-sm cursor-pointer"></div>
+          <div><label for="time" class="block text-sm font-medium text-white mb-2">Preferred Time</label><select id="time" name="time" required class="w-full px-5 py-3.5 rounded-xl border border-[#333] bg-[#0A0A0A] text-white text-sm cursor-pointer"><option value="">Select a time</option><option value="9:00 AM">9:00 AM</option><option value="10:00 AM">10:00 AM</option><option value="11:00 AM">11:00 AM</option><option value="12:00 PM">12:00 PM</option><option value="1:00 PM">1:00 PM</option><option value="2:00 PM">2:00 PM</option><option value="3:00 PM">3:00 PM</option><option value="4:00 PM">4:00 PM</option><option value="5:00 PM">5:00 PM</option></select></div>
+          <div><label for="message" class="block text-sm font-medium text-white mb-2">Additional Details <span class="text-white/40 font-normal">(Optional)</span></label><input id="message" name="message" type="text" placeholder="Design ideas, nail length, removal needed..." class="w-full px-5 py-3.5 rounded-xl border border-[#333] bg-[#0A0A0A] text-white placeholder-[#777] text-sm"></div>
+          <div class="md:col-span-2 flex flex-col sm:flex-row gap-4 pt-4">
+            <button type="submit" id="booking-submit" class="flex-1 px-7 py-4 bg-[#C9A96E] text-black rounded-full font-semibold text-base hover:bg-[#D4B896] transition-all duration-300">Continue to WhatsApp</button>
+            <a href="https://wa.me/2347034504387" id="direct-whatsapp" target="_blank" rel="noopener noreferrer" class="flex-1 px-7 py-4 border border-[#25D366] text-[#25D366] rounded-full font-semibold text-base hover:bg-[#25D366] hover:text-black transition-all duration-300 text-center flex items-center justify-center gap-2">Chat Directly</a>
+          </div>
+        </form>
+        <div class="flex flex-wrap justify-center gap-x-6 gap-y-3 mt-8 text-xs text-[#B7B0A8] font-medium"><span>✓ Confirmation required</span><span>✓ Flexible scheduling</span><span>✓ By appointment only</span></div>
+      </div>
+      <div class="grid grid-cols-1 sm:grid-cols-3 gap-5 mt-8 text-center">
+        <div><p class="text-white text-sm font-medium mb-1">Arrive on time</p><p class="text-xs text-[#B7B0A8] leading-relaxed">Please arrive a few minutes before your appointment.</p></div>
+        <div><p class="text-white text-sm font-medium mb-1">Need to reschedule?</p><p class="text-xs text-[#B7B0A8] leading-relaxed">Contact the studio as early as possible.</p></div>
+        <div><p class="text-white text-sm font-medium mb-1">First visit?</p><p class="text-xs text-[#B7B0A8] leading-relaxed">Mention any previous nail work when booking.</p></div>
+      </div>
+    </div>
+  </section>
+
+      <!-- ======FOOTER (refined premium layout with icons)=========== -->
+  <footer class="bg-[#0A0A0A] border-t border-white/10 pt-16 pb-8 px-5 sm:px-6 lg:px-12">
+    <div class="max-w-3xl mx-auto text-center">
+
+      <!-- Email CTA -->
+      <a href="mailto:hello@xsnailstech.com" class="inline-block text-[#C9A96E] text-sm tracking-[0.2em] uppercase hover:text-[#D4B896] transition-colors duration-300 font-medium">
+        hello@xsnailstech.com
+      </a>
+
+      <!-- Divider -->
+      <div class="w-12 h-px bg-[#C9A96E]/40 mx-auto my-6"></div>
+
+      <!-- Navigation Links -->
+      <nav class="flex flex-wrap justify-center gap-x-8 gap-y-3 text-sm text-white/60" aria-label="Footer navigation">
+        <a href="#services" class="hover:text-white transition-colors duration-300">Services</a>
+        <a href="#portfolio" class="hover:text-white transition-colors duration-300">Portfolio</a>
+        <a href="#about" class="hover:text-white transition-colors duration-300">About</a>
+        <a href="#reviews" class="hover:text-white transition-colors duration-300">Reviews</a>
+        <a href="#location" class="hover:text-white transition-colors duration-300">Location</a>
+        <a href="#book" class="hover:text-white transition-colors duration-300">Book</a>
+      </nav>
+
+      <!-- Social Links with Icons -->
+      <div class="flex justify-center gap-5 mt-7">
+        
+        <!-- Instagram -->
+        <a href="www.meet.greyy" target="_blank" rel="noopener noreferrer" class="w-11 h-11 rounded-full bg-white/5 border border-white/10 flex items-center justify-center hover:bg-[#E4405F]/20 hover:border-[#E4405F]/40 transition-all duration-300 group" aria-label="Instagram">
+          <svg class="w-5 h-5 text-white/70 group-hover:text-[#E4405F] transition-colors duration-300" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/>
+          </svg>
+        </a>
+
+        <!-- TikTok -->
+        <a href="www.IdontUseTikTok" target="_blank" rel="noopener noreferrer" class="w-11 h-11 rounded-full bg-white/5 border border-white/10 flex items-center justify-center hover:bg-white/15 hover:border-white/30 transition-all duration-300 group" aria-label="TikTok">
+          <svg class="w-5 h-5 text-white/70 group-hover:text-white transition-colors duration-300" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.93-.01 2.92.01 5.84-.02 8.76-.08 1.4-.54 2.79-1.35 3.94-1.31 1.92-3.58 3.17-5.91 3.21-1.43.08-2.86-.31-4.08-1.03-2.02-1.19-3.44-3.37-3.65-5.71-.02-.5-.03-1-.01-1.49.18-1.9 1.12-3.72 2.58-4.96 1.66-1.44 3.98-2.13 6.15-1.72.02 1.48-.04 2.96-.04 4.44-.99-.32-2.15-.23-3.02.37-.63.41-1.11 1.04-1.36 1.75-.21.51-.15 1.07-.14 1.61.24 1.64 1.82 3.02 3.5 2.87 1.12-.01 2.19-.66 2.77-1.61.19-.33.3-.69.3-1.06.02-2.36.01-4.72.02-7.08-.02-1.09-.04-2.18-.06-3.27z"/>
+          </svg>
+        </a>
+
+        <!-- Snapchat -->
+        <a href="www.meet.greyy" target="_blank" rel="noopener noreferrer" class="w-11 h-11 rounded-full bg-white/5 border border-white/10 flex items-center justify-center hover:bg-[#FFFC00]/10 hover:border-[#FFFC00]/30 transition-all duration-300 group" aria-label="Snapchat">
+          <svg class="w-5 h-5 text-white/70 group-hover:text-[#FFFC00] transition-colors duration-300" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M12.001 1.104c-4.452 0-8.062 3.3-8.062 8.354 0 1.993.793 3.835 2.282 5.212.206.19.366.419.408.679.059.351.018.704-.114 1.093-.094.278-.269.501-.523.665-.219.143-.47.242-.733.297-.352.074-.565.274-.689.488-.117.205-.128.426-.031.626.127.263.489.468.996.468.38 0 .797-.113 1.222-.232.236-.066.5-.139.79-.213.478.128.973.197 1.469.205.812.012 1.599-.115 2.338-.368.146.027.294.052.442.076.737.125 1.502.202 2.273.209.966.009 1.886-.163 2.732-.498.284.079.537.147.762.213.424.119.842.232 1.222.232.507 0 .869-.205.996-.468.097-.2.086-.421-.031-.626-.124-.214-.337-.414-.689-.488-.263-.055-.514-.154-.733-.297-.254-.164-.429-.387-.523-.665-.132-.389-.173-.742-.114-1.093.042-.26.202-.489.408-.679 1.489-1.377 2.282-3.219 2.282-5.212.001-5.054-3.609-8.354-8.061-8.354z"/>
+          </svg>
+        </a>
+
+      </div>
+
+      <!-- Bottom Bar -->
+      <div class="mt-10 pt-6 border-t border-white/10 text-center text-[#B7B0A8] text-xs tracking-wider">
+        <p>
+          &copy; <span id="current-year"></span> X's Nails Tech.
+          <span class="hidden sm:inline">•</span>
+          <span class="block sm:inline">Luxury Nail Studio • Lagos.</span>
+        </p>
+        <p class="mt-2 text-[10px] tracking-[0.15em] text-white/30">
+          Template by GR3Y &bull; Privacy Policy
+        </p>
+      </div>
+
+    </div>
+  </footer>
+
+  <!-- ===== LIGHTBOX ===== -->
+  <div id="lightbox" class="lightbox" role="dialog" aria-modal="true" aria-label="Portfolio image preview" aria-hidden="true">
+    <button id="lightbox-close" type="button" class="lightbox-close" aria-label="Close image preview">×</button>
+    <div class="text-center">
+      <img id="lightbox-image" src="" alt="">
+      <p id="lightbox-title" class="text-white text-sm mt-4 tracking-wide"></p>
+    </div>
+  </div>
+
+  <!-- ===== SCRIPTS ===== -->
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+  <script>
+    // AOS
+    AOS.init({ duration: 700, easing: 'ease-out-cubic', once: true, offset: 60 });
+
+    // Current year
+    document.getElementById('current-year').textContent = new Date().getFullYear();
+
+    // Navbar scroll
+    const navbar = document.getElementById('navbar');
+    function updateNavbar() {
+      navbar.classList.toggle('navbar-scrolled', window.scrollY > 50);
+    }
+    updateNavbar();
+    window.addEventListener('scroll', updateNavbar, { passive: true });
+
+    // Mobile nav
+    const hamburger = document.getElementById('hamburger-btn');
+    const mobileNav = document.getElementById('mobile-nav');
+    const bar1 = document.getElementById('bar1'), bar2 = document.getElementById('bar2'), bar3 = document.getElementById('bar3');
+    let menuOpen = false;
+    function openMobileMenu() {
+      menuOpen = true;
+      mobileNav.classList.add('open');
+      mobileNav.setAttribute('aria-hidden', 'false');
+      hamburger.setAttribute('aria-expanded', 'true');
+      hamburger.setAttribute('aria-label', 'Close navigation menu');
+      bar1.style.transform = 'translateY(8.75px) rotate(45deg)';
+      bar2.style.opacity = '0';
+      bar3.style.transform = 'translateY(-8.75px) rotate(-45deg)';
+      document.body.classList.add('menu-open');
+    }
+    function closeMobileMenu() {
+      menuOpen = false;
+      mobileNav.classList.remove('open');
+      mobileNav.setAttribute('aria-hidden', 'true');
+      hamburger.setAttribute('aria-expanded', 'false');
+      hamburger.setAttribute('aria-label', 'Open navigation menu');
+      bar1.style.transform = '';
+      bar2.style.opacity = '1';
+      bar3.style.transform = '';
+      document.body.classList.remove('menu-open');
+    }
+    hamburger.addEventListener('click', () => { menuOpen ? closeMobileMenu() : openMobileMenu(); });
+    document.querySelectorAll('.mobile-nav-link').forEach(link => link.addEventListener('click', closeMobileMenu));
+
+    // Parallax
+    const parallax = document.getElementById('experience');
+    let ticking = false;
+    function updateParallax() {
+      if (!parallax) { ticking = false; return; }
+      const rect = parallax.getBoundingClientRect();
+      if (rect.bottom < 0 || rect.top > window.innerHeight) { ticking = false; return; }
+      const intensity = window.innerWidth < 768 ? 0.06 : 0.18;
+      parallax.style.backgroundPositionY = `calc(30% + ${rect.top * intensity}px)`;
+      ticking = false;
+    }
+    window.addEventListener('scroll', () => { if (!ticking) { ticking = true; requestAnimationFrame(updateParallax); } }, { passive: true });
+
+    // Portfolio filter with smooth transitions
+    const filterButtons = document.querySelectorAll('.portfolio-filter');
+    const portfolioItems = document.querySelectorAll('.portfolio-item');
+    filterButtons.forEach(button => {
+      button.addEventListener('click', () => {
+        const filter = button.dataset.filter;
+        filterButtons.forEach(btn => btn.classList.remove('active'));
+        button.classList.add('active');
+        // Apply transition class and filter
         portfolioItems.forEach(item => {
-
-            item.addEventListener('click', () => {
-                openLightbox(item);
-            });
-
+          const category = item.dataset.category;
+          const match = filter === 'all' || category === filter;
+          if (match) {
+            item.classList.remove('hidden-item');
+            item.style.opacity = '1';
+            item.style.transform = 'scale(1)';
+          } else {
+            item.classList.add('hidden-item');
+            item.style.opacity = '0';
+            item.style.transform = 'scale(0.95)';
+          }
         });
+      });
+    });
 
+    // Lightbox
+    const lightbox = document.getElementById('lightbox');
+    const lightboxImage = document.getElementById('lightbox-image');
+    const lightboxTitle = document.getElementById('lightbox-title');
+    const lightboxClose = document.getElementById('lightbox-close');
+    function openLightbox(item) {
+      lightboxImage.src = item.dataset.image;
+      lightboxImage.alt = item.dataset.title || 'Nail Design';
+      lightboxTitle.textContent = item.dataset.title || 'Nail Design';
+      lightbox.classList.add('open');
+      lightbox.setAttribute('aria-hidden', 'false');
+      document.body.classList.add('menu-open');
+      lightboxClose.focus();
+    }
+    function closeLightbox() {
+      lightbox.classList.remove('open');
+      lightbox.setAttribute('aria-hidden', 'true');
+      lightboxImage.src = '';
+      lightboxTitle.textContent = '';
+      document.body.classList.remove('menu-open');
+    }
+    portfolioItems.forEach(item => item.addEventListener('click', () => openLightbox(item)));
+    lightboxClose.addEventListener('click', closeLightbox);
+    lightbox.addEventListener('click', e => { if (e.target === lightbox) closeLightbox(); });
+    document.addEventListener('keydown', e => { if (e.key === 'Escape' && lightbox.classList.contains('open')) closeLightbox(); });
 
-        lightboxClose.addEventListener(
-            'click',
-            closeLightbox
-        );
-
-
-        lightbox.addEventListener('click', event => {
-
-            if (event.target === lightbox) {
-                closeLightbox();
-            }
-
-        });
-
-
-        document.addEventListener(
-            'keydown',
-            event => {
-
-                if (
-                    event.key === 'Escape' &&
-                    lightbox.classList.contains('open')
-                ) {
-                    closeLightbox();
-                }
-
-            }
-        );
-
-
-        /* =====================================================
-           BOOKING FORM
-        ====================================================== */
-
-        const bookingForm =
-            document.getElementById('booking-form');
-
-        const bookingSubmit =
-            document.getElementById('booking-submit');
-
-
-        /*
-         * IMPORTANT:
-         *
-         * Replace this with the actual WhatsApp number.
-         *
-         * Format:
-         * 234XXXXXXXXXX
-         *
-         * Do not include +, spaces or brackets.
-         */
-
-        const WHATSAPP_NUMBER =
-            '234REPLACE_NUMBER';
-
-
-        function formatBookingDate(dateString) {
-
-            if (!dateString) {
-                return '';
-            }
-
-            const date =
-                new Date(`${dateString}T00:00:00`);
-
-            return date.toLocaleDateString(
-                'en-NG',
-                {
-                    weekday: 'long',
-                    day: 'numeric',
-                    month: 'long',
-                    year: 'numeric'
-                }
-            );
-        }
-
-
-        bookingForm.addEventListener(
-            'submit',
-            event => {
-
-                event.preventDefault();
-
-
-                if (!bookingForm.checkValidity()) {
-
-                    bookingForm.reportValidity();
-
-                    return;
-
-                }
-
-
-                if (
-                    WHATSAPP_NUMBER.includes(
-                        'REPLACE'
-                    )
-                ) {
-
-                    alert(
-                        'Please add the studio WhatsApp number before using the booking form.'
-                    );
-
-                    return;
-
-                }
-
-
-                const formData =
-                    new FormData(bookingForm);
-
-
-                const name =
-                    formData.get('fullName');
-
-                const phone =
-                    formData.get('phone');
-
-                const service =
-                    formData.get('service');
-
-                const date =
-                    formData.get('date');
-
-                const time =
-                    formData.get('time');
-
-                const message =
-                    formData.get('message');
-
-
-                const bookingMessage =
-`Hello X's Nails Tech,
+    // Booking form
+    const bookingForm = document.getElementById('booking-form');
+    const bookingSubmit = document.getElementById('booking-submit');
+    const WHATSAPP_NUMBER = '234REPLACE_NUMBER';
+    function formatBookingDate(dateString) {
+      if (!dateString) return '';
+      const date = new Date(`${dateString}T00:00:00`);
+      return date.toLocaleDateString('en-NG', { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' });
+    }
+    bookingForm.addEventListener('submit', event => {
+      event.preventDefault();
+      if (!bookingForm.checkValidity()) { bookingForm.reportValidity(); return; }
+      if (WHATSAPP_NUMBER.includes('REPLACE')) { alert('Please add the studio WhatsApp number before using the booking form.'); return; }
+      const formData = new FormData(bookingForm);
+      const name = formData.get('fullName'), phone = formData.get('phone'), service = formData.get('service');
+      const date = formData.get('date'), time = formData.get('time'), message = formData.get('message');
+      const bookingMessage = `Hello X's Nails Tech,
 
 I'd like to request an appointment.
 
@@ -2308,157 +866,41 @@ Preferred time: ${time}
 Additional details: ${message || 'None'}
 
 Please let me know if this slot is available. Thank you.`;
+      const whatsappURL = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(bookingMessage)}`;
+      bookingSubmit.disabled = true;
+      bookingSubmit.textContent = 'Opening WhatsApp...';
+      setTimeout(() => {
+        window.open(whatsappURL, '_blank', 'noopener,noreferrer');
+        bookingSubmit.disabled = false;
+        bookingSubmit.textContent = 'Continue to WhatsApp';
+      }, 300);
+    });
 
+    // Min date
+    const dateInput = document.getElementById('date');
+    const today = new Date();
+    dateInput.min = `${today.getFullYear()}-${String(today.getMonth()+1).padStart(2,'0')}-${String(today.getDate()).padStart(2,'0')}`;
 
-                const whatsappURL =
-                    `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(bookingMessage)}`;
+    // Direct WhatsApp
+    const directWhatsApp = document.getElementById('direct-whatsapp');
+    directWhatsApp.addEventListener('click', event => {
+      if (WHATSAPP_NUMBER.includes('REPLACE')) { event.preventDefault(); alert('Please add the studio WhatsApp number before using this button.'); return; }
+      directWhatsApp.href = `https://wa.me/${WHATSAPP_NUMBER}`;
+    });
 
-
-                bookingSubmit.disabled = true;
-                bookingSubmit.textContent =
-                    'Opening WhatsApp...';
-
-
-                setTimeout(() => {
-
-                    window.open(
-                        whatsappURL,
-                        '_blank',
-                        'noopener,noreferrer'
-                    );
-
-                    bookingSubmit.disabled = false;
-                    bookingSubmit.textContent =
-                        'Continue to WhatsApp';
-
-                }, 300);
-
-            }
-        );
-
-
-        /* =====================================================
-           MINIMUM BOOKING DATE
-        ====================================================== */
-
-        const dateInput =
-            document.getElementById('date');
-
-        const today =
-            new Date();
-
-        const year =
-            today.getFullYear();
-
-        const month =
-            String(
-                today.getMonth() + 1
-            ).padStart(2, '0');
-
-        const day =
-            String(
-                today.getDate()
-            ).padStart(2, '0');
-
-
-        dateInput.min =
-            `${year}-${month}-${day}`;
-
-
-        /* =====================================================
-           DIRECT WHATSAPP
-        ====================================================== */
-
-        const directWhatsApp =
-            document.getElementById('direct-whatsapp');
-
-
-        directWhatsApp.addEventListener(
-            'click',
-            event => {
-
-                if (
-                    WHATSAPP_NUMBER.includes(
-                        'REPLACE'
-                    )
-                ) {
-
-                    event.preventDefault();
-
-                    alert(
-                        'Please add the studio WhatsApp number before using this button.'
-                    );
-
-                    return;
-
-                }
-
-                directWhatsApp.href =
-                    `https://wa.me/${WHATSAPP_NUMBER}`;
-
-            }
-        );
-
-
-        /* =====================================================
-           SMOOTH ANCHOR SCROLL
-        ====================================================== */
-
-        document
-            .querySelectorAll('a[href^="#"]')
-            .forEach(anchor => {
-
-                anchor.addEventListener(
-                    'click',
-                    function(event) {
-
-                        const href =
-                            this.getAttribute('href');
-
-
-                        if (
-                            !href ||
-                            href === '#'
-                        ) {
-                            return;
-                        }
-
-
-                        const target =
-                            document.querySelector(href);
-
-
-                        if (!target) {
-                            return;
-                        }
-
-
-                        event.preventDefault();
-
-
-                        const navbarHeight =
-                            navbar.offsetHeight;
-
-
-                        const targetPosition =
-                            target.getBoundingClientRect().top +
-                            window.pageYOffset -
-                            navbarHeight -
-                            12;
-
-
-                        window.scrollTo({
-                            top: targetPosition,
-                            behavior: 'smooth'
-                        });
-
-                    }
-                );
-
-            });
-
-    </script>
-
+    // Smooth anchor scroll
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function(event) {
+        const href = this.getAttribute('href');
+        if (!href || href === '#') return;
+        const target = document.querySelector(href);
+        if (!target) return;
+        event.preventDefault();
+        const navbarHeight = navbar.offsetHeight;
+        const targetPosition = target.getBoundingClientRect().top + window.pageYOffset - navbarHeight - 12;
+        window.scrollTo({ top: targetPosition, behavior: 'smooth' });
+      });
+    });
+  </script>
 </body>
 </html>
-
